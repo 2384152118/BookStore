@@ -21,9 +21,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser(secret));
 
 //启用模板引擎  views 各种模板文件
-app.engine("html",ejs.renderFile);
-app.set("view engine","html");
-app.set("views","/views")
+app.engine('html', ejs.renderFile);
+app.set('view engine', 'html');
+app.set('views', './views');
 
 //启用session
 app.use(session({
@@ -56,11 +56,14 @@ conn.connect();
 
 
 //定义各种模块的路由请求
+//首页模块 子路由
+app.use("/",require("./module/front/index.js"))
+
 
 
 
 //静态资源托管文件    static
-app.use(express.static("/static"));
+app.use(express.static("static"));
 
 //端口监听
 app.listen(81,(req,res)=>{
