@@ -25,7 +25,7 @@
     padding-top: 18px;
     float: left;
 }
-input{
+#box input{
     width: 300px;
     border: 1px solid #e2e2e2;
     height: 40px;
@@ -77,4 +77,39 @@ input{
 .layui-breadcrumb {
     margin-left: 290px;
     padding-top:15px;
+}
+/* body{
+	background-color: lightblue;
+} */
+#agree{
+	color: blue;
+
+}
+.big-box{
+	position: absolute;
+	top:100px;
+	left: 350px;
+	/* height: 500px; */
+	/* border: 1px solid gray; */
+	background-color: white;
+}
+.second-box{
+	position: relative;
+	top:20px;
+}
+span{
+	color: red;
+}
+.fuwu{
+	color: blue;
+}
+
+.top-header{
+	position: absolute;
+	top:56px;
+	
+}
+.logo{
+	height: 80px;
+	width:200px;
 }

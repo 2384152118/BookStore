@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" src="" />
+        <link rel="stylesheet" href="/layui/css/layui.css">
+		<link rel="stylesheet" href="/css/index.css">
+		<script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+		<script src="/js/regist.js"></script>
+		<script src="/layui/layui.all.js"></script>
+		
+	</head>
+
+	<body>
+		<div class="big-box">
+			<div class="second-box">
+
+				<form class="layui-form " id="userregist" >
+                     <!--用户名-->
+					<div class="layui-form-item">
+						<label class="layui-form-label">用户名</label>
+						<div class="layui-input-inline">
+							<input type="password" name="password" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux"><span>* </span></div>
+					</div>
+                    <!--电话-->
+					<div class="layui-form-item">
+						<label class="layui-form-label">电话</label>
+						<div class="layui-input-inline">
+							<input type="password" name="password" required lay-verify="required" placeholder="请输入电话号码" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux"><span>* </span>请输入电话</div>
+					</div>
+                 <!--设置密码-->
+					<div class="layui-form-item">
+						<label class="layui-form-label">设置密码</label>
+						<div class="layui-input-inline">
+							<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux"><span>*</span> 长度为6-16位，建议由字母、数字或符号组合，区分大小写</div>
+					</div>
+                 <!--确认密码-->
+					<div class="layui-form-item">
+						<label class="layui-form-label">确认密码</label>
+						<div class="layui-input-inline">
+							<input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux"><span>* </span>请再次输入密码</div>
+					</div>
+                  <!--验证码-->
+					<div class="layui-form-item">
+						<label class="layui-form-label">验证码</label>
+						<div class="layui-input-inline">
+							<input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-form-mid layui-word-aux"><span>* </span>不区分大小写</div>
+					</div>
+
+
+					<div class="layui-form-item agrees" style="width: 250px;margin-left: 55px;">
+						<input type="checkbox" checked="checked" name="agree" value="1" style="display: inline-block;"/>
+						<span>
+							我已阅读并遵循 
+							<a href="javascript:void(0);" id="agree">服务条款</a>
+						</span>
+					</div>
+
+	
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<button class="layui-btn" type="button" lay-submit lay-filter="userregist">马上注册</button>
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+	</body>
+
+</html>
