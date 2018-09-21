@@ -1,9 +1,9 @@
 $(function () {
     var form = layui.form;
     //验证码刷新
-    // $('#codeimg').click(function () {
-    //     $(this).attr('src', '/coder?' + new Date());
-    // });
+    $('#codeimg').click(function () {
+        $(this).attr('src', '/coder?' + new Date());
+    });
     // 用户注册
     form.on('submit(userregist)', function(data){
         $.ajax({

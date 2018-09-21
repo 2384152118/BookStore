@@ -13,10 +13,10 @@ $(function () {
             data: $('#userlogin').serialize(),
             success: function (result) {
                 console.log(result);
-                // if(result.r == 'u_not'){
-                //     $('input[name="username"]').parent().next('.layui-form-mid').html('账号不存在');
-                //     return ;
-                // }
+                if(result.r == 'u_not'){
+                    $('input[name="username"]').parent().next('.layui-form-mid').html('账号不存在');
+                    return ;
+                }
                 if(result.r == 'ok'){
                     window.location.href = '/';
                 }

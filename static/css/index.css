@@ -47,15 +47,29 @@
     cursor: pointer;
     border-radius: 5px;
 }
-.login {
+.login1 {
     float: right;
     width: 200px;
     font-size: 16px;
     font-family: 'Microsoft YaHei';
     padding-top: 30px;
     margin-right: 60px;
+    display: none;
 }
-.login li{
+.login1 li{
+    float: left;
+    list-style-type: none;
+}
+.login2 {
+    float: right;
+    width: 200px;
+    font-size: 16px;
+    font-family: 'Microsoft YaHei';
+    padding-top: 30px;
+    margin-right: 60px;
+    display: block;
+}
+.login2 li{
     float: left;
     list-style-type: none;
 }
@@ -139,4 +153,10 @@ span{
 }
 .author-regist-a {
     margin-left: 40px;
+}
+.layui-form-item .red {
+    color: red !important;
+}
+.coder {
+    margin-top: -10px;
 }

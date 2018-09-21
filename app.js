@@ -56,7 +56,7 @@ conn.connect();
 
 //验证码模块
 app.get('/coder', (req, res) => {
-    var captcha = svgCaptcha.create({noise:4,ignoreChars: '0o1i', size:4,background: '#cc9966',height:38, width:90});
+    var captcha = svgCaptcha.create({noise:4,ignoreChars: '0o1i', size:1,background: '#cc9966',height:38, width:90});
 	req.session.coder = captcha.text;
 	
 	res.type('svg'); // 使用ejs等模板时如果报错 res.type('html')

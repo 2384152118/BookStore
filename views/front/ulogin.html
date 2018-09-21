@@ -22,31 +22,23 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">用户名</label>
 						<div class="layui-input-inline">
-							<input type="password" name="password" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+							<input type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
 						</div>
-						<div class="layui-form-mid layui-word-aux"><span>* </span></div>
+						<div class="layui-form-mid layui-word-aux red"><span >* </span></div>
 					</div>
                    
 					<div class="layui-form-item">
 						<label class="layui-form-label">密码</label>
 						<div class="layui-input-inline">
-							<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+							<input type="password" name="upasswd" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 						</div>
 						<div class="layui-form-mid layui-word-aux"><span>*</span> 长度为6-16位，建议由字母、数字或符号组合，区分大小写</div>
-					</div>
-                 <!--确认密码-->
-					<div class="layui-form-item">
-						<label class="layui-form-label">确认密码</label>
-						<div class="layui-input-inline">
-							<input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
-						</div>
-						<div class="layui-form-mid layui-word-aux"><span>* </span>请再次输入密码</div>
 					</div>
                   <!--验证码-->
 					<div class="layui-form-item">
 						<label class="layui-form-label">验证码</label>
 						<div class="layui-input-inline">
-							<input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+							<input type="text" name="coder" required lay-verify="required" autocomplete="off" class="layui-input">
 						</div>
 						<div class="layui-form-mid layui-word-aux coder">
                             <img src="/coder" alt="" id="codeimg">
