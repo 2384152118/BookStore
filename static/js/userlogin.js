@@ -1,16 +1,16 @@
 $(function () {
     var form = layui.form;
     //验证码刷新
-    // $('#codeimg').click(function () {
-    //     $(this).attr('src', '/coder?' + new Date());
-    // });
-    // 用户注册
-    form.on('submit(userregist)', function(data){
+    $('#codeimg').click(function () {
+        $(this).attr('src', '/coder?' + new Date());
+    });
+    // 用户登录
+    form.on('submit(userlogin)', function(data){
         $.ajax({
-            url: '/front/regist',
+            url: '/front/ulogin',
             type: 'POST',
             dataType: 'JSON',
-            data: $('#userregist').serialize(),
+            data: $('#userlogin').serialize(),
             success: function (result) {
                 console.log(result);
                 // if(result.r == 'u_not'){
@@ -18,7 +18,7 @@ $(function () {
                 //     return ;
                 // }
                 if(result.r == 'ok'){
-                    window.location.href = '/ulogin';
+                    window.location.href = '/';
                 }
             }
         });
