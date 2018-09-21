@@ -113,3 +113,30 @@ span{
 	height: 80px;
 	width:200px;
 }
+
+.n-card {
+    position: relative;
+}
+.n-right {
+    width: 280px;
+    height: 140px;
+    position: absolute;
+    left: 135px;
+    top: 10px;
+}
+.n-card-footer {
+    color: #a6a6a6;
+}
+.n-card-author {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+.n-card-type {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+.author-regist-a {
+    margin-left: 40px;
+}

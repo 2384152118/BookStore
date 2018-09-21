@@ -57,7 +57,9 @@ conn.connect();
 
 //定义各种模块的路由请求
 //首页模块 子路由
-app.use("/",require("./module/front/index"));
+app.use("/",require("./module/front/index.js"));
+//作者模块 子路由
+app.use("/author",require("./module/author/author.js"));
 
 
 
