@@ -1,8 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const async = require('async');
 //首页路由  跳到index首页
 router.get('/', (req, res)=>{
-    res.render('front/index');
+    //判断有没有session信息
+    //查询novel数据
+    let data={uid:"",username:""};
+    data.uid=req.session.uid;
+    data.username=req.session.username;
+    let sql = 'SELECT * FROM novel';
+    conn.query(sql, (err, results)=>{
+        data.novellist=results;
+    });
+    res.render('front/index',data);
 });
 router.get('/userlogin', (req, res)=>{
     res.render('front/regist');
@@ -78,7 +88,7 @@ router.post("/front/ulogin", (req, res) => {
     //进行数据验证
     let sql = 'SELECT * FROM user WHERE username = ? AND upasswd = ?';
     conn.query(sql, [d.username,d.upasswd], (err, result)=>{
-        console.log(result);
+        // console.log(result);
         //账号是不是存在
         if(!result.length){
             res.json({r:'u_not'});
@@ -89,12 +99,16 @@ router.post("/front/ulogin", (req, res) => {
             res.json({r:'p_err'});
             return ;
         }
-        res.json({r:'ok'});
-        //登录成功
-        //保存session信息
+        // //保存session信息
         req.session.uid = result[0].uid;
         req.session.username = result[0].username;
-        // //更新状态
+
+        
+        res.json({r:'ok'});
+        //登录成功
+        
+
+        //更新状态
         // let sql = 'UPDATE SET admin loginnums = loginnums + 1, lasttimes = ? WHERE uid = ?';
         // conn.query(sql, [new Date().toLocaleString(), result[0].uid], (err, result)=>{
         //     res.json({r:'ok'});

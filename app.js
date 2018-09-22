@@ -30,7 +30,7 @@ app.use(session({
     secret:secret,
     resave:false,  //每次都重新保存session
     saveUninitialized: true,
-    cookie: {maxAge:30*24*3600*1000}  //最大有效期
+    cookie: {maxAge:1*24*3600*1000}  //最大有效期
 }));
 
 //multer 文件上传模块  upload 临时存储上传图片或文件的文件夹
