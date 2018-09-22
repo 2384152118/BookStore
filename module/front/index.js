@@ -5,15 +5,16 @@ const async = require('async');
 router.get('/', (req, res)=>{
     //判断有没有session信息
     //查询novel数据
-    let data={uid:"",username:""};
+    let data={};
     data.uid=req.session.uid;
     data.username=req.session.username;
     let sql = 'SELECT * FROM novel';
     conn.query(sql, (err, results)=>{
         data.novellist=results;
+        res.render('front/index',data);
     });
-    res.render('front/index',data);
 });
+//用户注册  路由
 router.get('/userlogin', (req, res)=>{
     res.render('front/regist');
 });
@@ -36,28 +37,28 @@ router.post("/front/regist", (req, res) => {
             let sql = 'SELECT * FROM user WHERE username = ?';
             conn.query(sql, d.username, (err, result) => {
                 // //账号是不是存在  存在就停止执行
-                // if (d.username in result) {
-                //     res.json({
-                //         r: 'u_not'
-                //     });
-                //     return;
-                // }
-                // //判断密码是否符合正确格式  (?!^\\d+$)(?!^[a-zA-Z]+$)(?!^[_#@]+$).{8,}  d.upasswd != pd
-                // let pd = /^(\w){6,20}$/;
-                // if(!pd.exec(d.upasswd)){
-                //     res.json({
-                //         r:"passwd_not"
-                //     })
-                //     return;
-                // }
-                // //判断电话是否符合正确格式
-                // let tel = /^[1][3,4,5,7,8][0-9]{9}$/;
-                // if(!tel.exec(d.utel)){
-                //     res.json({
-                //         r:"utel_not"
-                //     })
-                //     return;
-                // }
+                if (result[0] && result[0].username == d.username) {
+                    res.json({
+                        r: 'u_has'
+                    });
+                    return;
+                }
+                //判断密码是否符合正确格式  (?!^\\d+$)(?!^[a-zA-Z]+$)(?!^[_#@]+$).{8,}  d.upasswd != pd
+                let pd = /^(\w){6,20}$/;
+                if(!pd.exec(d.upasswd)){
+                    res.json({
+                        r:"passwd_not"
+                    })
+                    return;
+                }
+                //判断电话是否符合正确格式
+                let tel = /^[1][3,4,5,7,8][0-9]{9}$/;
+                if(!tel.exec(d.utel)){
+                    res.json({
+                        r:"utel_not"
+                    })
+                    return;
+                }
                 //所有判断正确就可以添加进数据库
               console.log(d);
               let sql = 'INSERT INTO user(username,  upasswd, utel, addtimes) VALUES (?,?,?,?)';
@@ -116,5 +117,59 @@ router.post("/front/ulogin", (req, res) => {
         
     });
 })
-//导出子路由
+//完结的小说    路由
+router.get("/final",(req, res)=>{
+    let info={};
+    info.uid=req.session.uid;
+    info.username=req.session.username;
+    res.render("front/final",info);
+})
+//古代言情  路由
+router.get("/ancient",(req, res)=>{
+    let info={};
+    info.uid=req.session.uid;
+    info.username=req.session.username;
+    let sql = 'SELECT * FROM novel WHERE noveltype="古代言情"';
+    conn.query(sql, (err, results)=>{
+        info.novellist=results;
+    res.render("front/ancient",info);
+    });
+})
+//现代言情  
+router.get("/modern",(req, res)=>{
+    let info={};
+    info.uid=req.session.uid;
+    info.username=req.session.username;
+    let sql = 'SELECT * FROM novel WHERE noveltype="现代言情"';
+    conn.query(sql, (err, results)=>{
+        info.novellist=results;
+    res.render("front/modern",info);
+    });
+})
+//玄幻仙侠  
+router.get("/xianxia",(req, res)=>{
+    let info={};
+    info.uid=req.session.uid;
+    info.username=req.session.username;
+    let sql = 'SELECT * FROM novel WHERE noveltype="玄幻仙侠"';
+    conn.query(sql, (err, results)=>{
+        info.novellist=results;
+    res.render("front/xianxia",info);
+    });
+})
+//悬疑灵幻
+router.get("/xuanyi",(req, res)=>{
+    let info={};
+    info.uid=req.session.uid;
+    info.username=req.session.username;
+    let sql = 'SELECT * FROM novel WHERE noveltype="悬疑灵幻"';
+    conn.query(sql, (err, results)=>{
+        info.novellist=results;
+    res.render("front/xuanyi",info);
+    });
+})
+router.get("/mycenter",(req, res)=>{
+    res.render("front/mycenter")
+})
+//导出子路由 
 module.exports = router;

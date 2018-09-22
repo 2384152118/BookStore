@@ -30,7 +30,7 @@ app.use(session({
     secret:secret,
     resave:false,  //每次都重新保存session
     saveUninitialized: true,
-    cookie: {maxAge:1*24*3600*1000}  //最大有效期
+    cookie: {maxAge:30*24*3600*1000}  //最大有效期
 }));
 
 //multer 文件上传模块  upload 临时存储上传图片或文件的文件夹
@@ -74,6 +74,7 @@ app.use("/author",require("./module/author/author.js"));
 
 
 //静态资源托管文件    static
+app.use('/upload', express.static('upload'));
 app.use(express.static("static"));
 
 //端口监听

@@ -1,59 +1,25 @@
 <% include header.html%>
 <div>
-
     <div style="padding: 20px; background-color: #F2F2F2;">
         <div class="layui-row layui-col-space15">
-
+            <% for(let n of novellist){%>
             <div class="layui-col-md4">
                 <div class="layui-card">
                     <div class="layui-card-body n-card">
-                        <img class='n-left' src="/img/novel.jpg" alt="">
+                        <img class='n-leftn-left' src="<%=n.nimg%>" alt="">
                         <div class='n-right'>
-                            <h3><a href="#">这里写书名</a></h3>
-                            <p>这里写简介</p>
+                            <h3><a href="#"><%=n.nname%></a></h3>
+                            <p><%=n.info%></p>
                             <div class="n-card-footer">
-                                <p class="n-card-author">这里写作者</p>
-                                <p class="n-card-type">这里写类别</p>
+                                <p class="n-card-author"><%=n.aname%></p>
+                                <p class="n-card-type"><%=n.noveltype%></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="layui-col-md4">
-                <div class="layui-card">
-                    <div class="layui-card-body n-card">
-                        <img class='n-left' src="/img/novel.jpg" alt="">
-                        <div class='n-right'>
-                            <h3><a href="#">这里写书名</a></h3>
-                            <p>这里写简介</p>
-                            <div class="n-card-footer">
-                                <p class="n-card-author">这里写作者</p>
-                                <p class="n-card-type">这里写类别</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="layui-col-md4">
-                <div class="layui-card">
-                    <div class="layui-card-body n-card">
-                        <img class='n-left' src="/img/novel.jpg" alt="">
-                        <div class='n-right'>
-                            <h3><a href="#">这里写书名</a></h3>
-                            <p>这里写简介</p>
-                            <div class="n-card-footer">
-                                <p class="n-card-author">这里写作者</p>
-                                <p class="n-card-type">这里写类别</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-
+            <%}%>
         </div>
     </div>
-
 </div>
 <% include footer.html%>

@@ -7,7 +7,7 @@
     <title>头部</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" href="/css/index.css">
-    
+    <link rel="icon" href="/img/ico.png" type="img/x-ico">
 </head>
 
 <body >
@@ -20,20 +20,20 @@
             </div>
             <div id="login1">
                 <ul>
-                    <li><a href= <%= uid?"/mycenter":"/ulogin"%> ><%- uid?uid:"登录"%></a> </li>
-                    <li id="user1">&nbsp;<a href=<%= username?"/mycenter":"/ulogin"%>><%= username?username:"注册"%></a></li>
+                    <li id="user1"><a href= <%= uid?"/mycenter":"/ulogin"%> ><%- uid?"<img id='userimg' src='/img/user.jpg'>":"登录"%></a> </li>
+                    <li id="user1">&nbsp;<a href=<%= username?"/mycenter":"/userlogin"%>><%= username?username:"注册"%></a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="top2">
         <ul class="layui-nav" lay-filter="">
-            <li class="layui-nav-item layui-this"><a href="">全部</a></li>
-            <li class="layui-nav-item "><a href="">完结</a></li>
-            <li class="layui-nav-item"><a href="">古代言情</a></li>
-            <li class="layui-nav-item"><a href="">现代言情</a></li>
-            <li class="layui-nav-item"><a href="">玄幻仙侠</a></li>
-            <li class="layui-nav-item"><a href="">悬疑灵幻</a></li>
+            <li class="layui-nav-item layui-this"><a href="/">全部</a></li>
+            <li class="layui-nav-item "><a href="/final">完结</a></li>
+            <li class="layui-nav-item"><a href="/ancient">古代言情</a></li>
+            <li class="layui-nav-item"><a href="/modern">现代言情</a></li>
+            <li class="layui-nav-item"><a href="/xianxia">玄幻仙侠</a></li>
+            <li class="layui-nav-item"><a href="xuanyi">悬疑灵幻</a></li>
             <li class="layui-nav-item author"><a href="/author">作者专区</a></li>
         </ul>
     </div>
