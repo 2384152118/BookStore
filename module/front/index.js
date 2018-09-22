@@ -116,5 +116,5 @@ router.post("/front/ulogin", (req, res) => {
         
     });
 })
-//导出子路由 
+//导出子路由
 module.exports = router;

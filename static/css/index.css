@@ -125,6 +125,13 @@ span{
     left: 135px;
     top: 10px;
 }
+
+.n-right>p {
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+  }
+
 .n-card-footer {
     color: #a6a6a6;
 }
@@ -141,7 +148,76 @@ span{
 .author-regist-a {
     margin-left: 40px;
 }
-.layui-form-item .red {
+ #author-nav {
+     height: 58px;
+     width: 100%;
+     background-color: white;
+     box-shadow: 0 4px 8px 0 rgba(7, 17, 27, 0.1);
+     position: relative;
+ }
+
+ #author-nav .logo {
+     width: 140px;
+     height: 100%;
+     position: absolute;
+     left: 100px;
+ }
+
+ .author-tou {
+     width: 36px;
+     height: 36px;
+     position: absolute;
+     right: 200px;
+     top: 11px;
+ }
+
+ .author-name {
+     color: black;
+     position: absolute;
+     right: 100px;
+     top: 20px;
+ }
+ .author-body {
+     background-color: #EFEFEF;
+ }
+ .author-block {
+    width: 120px;
+    font-size: 28px;
+    margin: auto;
+    line-height: 58px;
+    color: rgb(93,145, 77);
+}
+ .author-content {
+     width: 1100px;
+     height: 600px;
+     margin: 20px auto;
+     /* border: 1px solid gray; */
+     position: relative;
+ }
+ .author-aside {
+     width: 80px;
+     background-color: white;
+     font-size: 16px;
+     box-shadow: 2px 4px 8px 2px rgba(7, 17, 27, 0.1);
+ }
+ .author-aside li {
+     height: 40px;
+     line-height: 40px;
+     text-align: center;
+ }
+ .author-aside-content li {
+     width: 1010px;
+     height: 600px;
+     /* border: 1px solid rgb(182, 180, 182); */
+     background-color: white;
+     position: absolute;
+     top: 0px;
+     right: 0px;
+     display: none;
+     box-shadow: 2px 4px 8px 2px rgba(7, 17, 27, 0.1);
+ }
+ 
+ .layui-form-item .red {
     color: red !important;
 }
 .coder {
@@ -156,3 +232,8 @@ span{
     padding-top: 10px;
     padding-left: 15px;
 }
+ 
+.red {
+    color:red !important;
+}
+ 

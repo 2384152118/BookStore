@@ -7,9 +7,6 @@
 		<link rel="stylesheet" type="text/css" src="" />
         <link rel="stylesheet" href="/layui/css/layui.css">
 		<link rel="stylesheet" href="/css/index.css">
-		<script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
-		<script src="/js/userlogin.js"></script>
-		<script src="/layui/layui.all.js"></script>
 		
 	</head>
 
@@ -17,29 +14,29 @@
 		<div class="big-box">
 			<div class="second-box">
 
-				<form class="layui-form " id="userlogin" >
+				<form class="layui-form " id="aulogin" >
                      <!--用户名-->
 					<div class="layui-form-item">
 						<label class="layui-form-label">用户名</label>
 						<div class="layui-input-inline">
-							<input type="password" name="password" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+							<input type="text" name="aname" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
 						</div>
-						<div class="layui-form-mid layui-word-aux"><span>* </span></div>
+						<div class="layui-form-mid layui-word-aux red"><span>* </span></div>
 					</div>
                    
 					<div class="layui-form-item">
 						<label class="layui-form-label">密码</label>
 						<div class="layui-input-inline">
-							<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+							<input type="password" name="apassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 						</div>
-						<div class="layui-form-mid layui-word-aux"><span>*</span></div>
+						<div class="layui-form-mid layui-word-aux red"><span>*</span></div>
 					</div>
                 
                   <!--验证码-->
 					<div class="layui-form-item">
 						<label class="layui-form-label">验证码</label>
 						<div class="layui-input-inline">
-							<input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+							<input type="text" name="coder" required lay-verify="required" autocomplete="off" class="layui-input">
 						</div>
 						<div class="layui-form-mid layui-word-aux coder">
                             <img src="/coder" alt="" id="codeimg">
@@ -47,15 +44,22 @@
 					</div>
 					<div class="layui-form-item">
 						<div class="layui-input-block">
-							<button class="layui-btn" type="button" lay-submit lay-filter="">登录</button>
-							<!-- <button class="layui-btn" type="button" lay-submit lay-filter="">注册</button> -->
+							<button class="layui-btn" type="button" lay-submit lay-filter="aulogin">登录</button>
 							<a href="/author/regist" class="author-regist-a">注册</a>
 						</div>
 					</div>
 				</form>
 			</div>
+
+			
 		</div>
 		
+		
 	</body>
+
+	<script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+		<script src="/js/aulogin.js"></script>
+		<script src="/layui/layui.all.js"></script>
+		
 
 </html>
