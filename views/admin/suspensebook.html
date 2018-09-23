@@ -1,0 +1,63 @@
+<% include head.html%>
+<div class="layui-body">
+	<div class="admin_content">
+		<table class="layui-table  mytable ">
+			<colgroup>
+				<col width="100">
+				<col width="300">
+				<col width="180">
+				<col width="280">
+				<col width="300">
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>小说名字</th>
+					<th>小说作者</th>
+					<th>关键字</th>
+					<th>添加时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			
+			<!--<tbody>
+				<tr>
+					<th>12</th>
+					<th>213</th>
+					<th>54</th>
+					<th>75</th>
+					<th>添加45时间</th>
+					<th>77</th>
+				</tr>
+			</tbody>-->
+			<tbody>
+				<% for (let n of booklist){ %>
+				<tr>
+					<td>
+						<%=n.nid%>
+					</td>
+					<td>
+						<%=n.nname%>
+					</td>
+					<td>
+						<%=n.aname%>
+					</td>
+					<td>
+						<%=n.keywords%>
+					</td>
+					<td>
+						<%=n.ndatetime.toLocaleString()%>
+					</td>
+					<td>
+						<a href="javascript:;" class="delbook" nid="<%=n.nid%>">删除</a>
+						
+
+					</td>
+				</tr>
+				<%}%>
+			</tbody>
+		</table>
+	</div>
+</div>
+<% include foot.html%>

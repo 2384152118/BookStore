@@ -1,0 +1,46 @@
+<% include head.html%>
+<div class="layui-body">
+	<div class="admin_content">
+		<table class="layui-table  readertable ">
+			<colgroup>
+				<col width="150">
+				<col width="200">
+				<col width="200">
+				<col width="300">
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>读者名字</th>
+					<th>读者联系方式</th>
+					<th>注册时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% for (let r of readerlist){ %>
+				<tr>
+					<td>
+						<%=r.uid%>
+					</td>
+					<td>
+						<%=r.username%>
+					</td>
+					<td>
+						<%=r.utel%>
+					</td>
+					<td>
+						<%=r.addtimes.toLocaleString()%>
+					</td>
+					<td>
+						<a href="javascript:;" class="readerstop" rid="<%=r.uid%>">禁止登录</a>
+					</td>
+				</tr>
+				<%}%>
+			</tbody>
+		</table>
+	</div>
+</div>
+<% include foot.html%>

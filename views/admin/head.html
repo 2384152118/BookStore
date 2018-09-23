@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>银杏文学管理中心</title>
+		<link rel="stylesheet" href="/layui/css/layui.css">
+		<link rel="stylesheet" href="/css/admin.css">
+	</head>
+
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header ">
+				<div class="layui-logo adminlogo"><img src="/img/adminlogo.gif" /></div>
+				<h1 class="admintitle">欢迎来到银杏文学管理中心</h1>
+
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="/admin/login" class="esc">退了</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="layui-side layui-bg-black admin_aside">
+				<div class="layui-side-scroll ">
+					<ul class="layui-nav layui-nav-tree " lay-filter="test">
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" href="javascript:;">用户管理</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="/admin/readermanage">读者管理</a>
+								</dd>
+								<dd>
+									<a href="/admin/authormanage">作者管理</a>
+								</dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a href="javascript:;">书籍分类管理</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="/admin/bookfinish">完结</a>
+								</dd>
+								<dd>
+									<a href="/admin/ancientromance">古代言情</a>
+								</dd>
+								<dd>
+									<a href="/admin/modernromance">现代言情</a>
+								</dd>
+								<dd>
+									<a href="/admin/fantasybook">玄幻仙侠</a>
+								</dd>
+								<dd>
+									<a href="/admin/suspensebook">悬疑灵幻</a>
+								</dd>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+			</div>
