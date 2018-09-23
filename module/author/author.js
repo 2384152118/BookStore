@@ -1,5 +1,7 @@
 const express = require('express');
 const async = require('async');
+//文件上传模块
+const multer = require('multer');
 const router = express.Router();
 //作家登录路由
 router.get('/', (req, res) => {
@@ -10,45 +12,61 @@ router.get('/regist', (req, res) => {
     res.render('author/regist');
 });
 
-//作家专区路由
+//作家专区  作品管理
 router.get('/index', (req, res) => {
-    let data={};
-    data.aid=req.session.aid;
-    data.aimg=req.session.aimg;
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
     data.aname = req.session.aname;
-    
+    data.asex = req.session.asex;
+    data.atel = req.session.atel;
+    data.aemail = req.session.aemail;
+    data.address = req.session.address;
+
+    let arr = []; //用来存放所有小说的id;
+
     async.waterfall([
-        function(cb){
+        function (cb) {
             //根据作家id查找该作者的所以小说
-            let sql='SELECT * FROM novel WHERE aid= ?';
-            conn.query(sql,data.aid,(err,results)=>{
+            let sql = 'SELECT * FROM novel WHERE aid= ?';
+            let aid = JSON.parse(data.aid);
+            conn.query(sql, aid, (err, results) => {
                 if (err) {
                     console.log(err);
                     return;
                 }
-                // console.log(results);
-                cb(null,results);
+                for (let i = 0; i < results.length; i++) {
+                    arr.push(results[i].nid);
+                }
+                cb(null, results);
             })
         },
-        function(re,cb){
+        function (re, cb) {
             //根据小说id查找该小说的所有章节
-            let sql='SELECT * FROM section WHERE nid= ?'
-            for(let i=0;i<re.length;i++){
-                conn.query(sql,re[i].nid,(err,results)=>{
-                    if (err) {
-                        console.log(err);
-                        return;
+            let str = JSON.stringify(arr);
+            let newstr = str.replace('[', '(').replace(']', ')');
+            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
+            conn.query(sql, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < re.length; i++) {
+                    let section = [];
+                    for (let j = 0; j < results.length; j++) {
+                        if (re[i].nid == results[j].nid) {
+                            section.push(results[j]);
+                        }
                     }
-                    console.log(i,re[i].nname,results);
-                    re[i]["section"]=results;
-                })
-            }
-            cb(null,re);
+                    re[i].section = JSON.stringify(section);
+                }
+                cb(null, re);
+            })
         }
-    ],(err,result)=>{
-        data.books=result;
+    ], (err, result) => {
+        data.books = result;
         console.log(data);
-        res.render('author/index',data);
+        res.render('author/index', data);
     });
 });
 
@@ -85,7 +103,10 @@ router.post("/alogin", (req, res) => {
         req.session.aid = result[0].aid;
         req.session.aimg = result[0].aimg;
         req.session.aname = result[0].aname;
-
+        req.session.atel = result[0].atel;
+        req.session.aemail = result[0].aemail;
+        req.session.asex = result[0].asex;
+        req.session.address = result[0].address;
 
         res.json({
             r: 'ok'
@@ -110,14 +131,14 @@ router.post("/regist", (req, res) => {
     conn.query(sql, d.aname, (err, result) => {
         console.log(result[0]);
         //账号是不是存在  存在就停止执行
-        if (result[0]&&result[0].aname==d.aname) {
+        if (result[0] && result[0].aname == d.aname) {
             res.json({
                 r: 'autour_exist'
             });
             return;
         }
         //判断两次输入密码是否一致
-        if(d.apassword!=d.password){
+        if (d.apassword != d.password) {
             res.json({
                 r: 'pwd_err'
             });
@@ -168,5 +189,48 @@ router.post("/regist", (req, res) => {
     });
 });
 
+
+// 上传文件的文件夹设置
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) { //存放路径
+        //按照月份存放文件
+        cb(null, `./upload/${new Date().getFullYear()}/${(new Date().getMonth()+1).toString().padStart(2, '0')}`);
+    },
+    filename: function (req, file, cb) { //文件命名
+        let filename = new Date().valueOf() + '_' + Math.random().toString().substr(2, 8) + '.' + file.originalname.split('.').pop();
+        // originalname ：文件的原始名称，包括后缀  0.2365895665468465156  15363008071.45_633055.jpg
+        cb(null, filename)
+    }
+});
+const upload = multer({
+    storage: storage
+});
+
+//作者修改个人信息
+// 接收上传数据  使用第三方模块  multer
+router.post('/upload', upload.single('images'), (req, res) => {
+    console.log(req.body);
+    console.log(req.file);
+    res.json(req.file);
+});
+
+//作者查看小说
+router.get('/look', (req, res) => {
+    res.render('author/look');
+})
+//创建小说
+router.get('/write_novel', (req, res) => {
+    res.render('author/write_novel');
+})
+//写章节 
+router.get('/write_section', (req, res) => {
+    res.render('author/write_section');
+})
+//完结状态
+router.post('/overbook', (req, res) => {
+    let d=req.body;
+    console.log(d.nid*1);
+    //修改小说状态
+})
 
 module.exports = router;

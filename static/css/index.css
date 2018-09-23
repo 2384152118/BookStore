@@ -378,3 +378,60 @@ span{
 	font-size: 30px;
 	color: rgb(93,145, 77);
 }
+
+.au-title {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #DFE0E6;
+    text-indent: 2em;
+}
+
+.self .logo {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-top: -10px;
+}
+
+.sure {
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 30px;
+    background-color: #009688;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    position: absolute;
+    margin-left: 180px;
+}
+
+.self {
+    width: 500px;
+    margin: 40px;
+}
+.myinfo {
+    margin-top: 10px;
+}
+.au-sex {
+    padding-top: 10px;
+}
+.au-btn {
+    width: 80px;
+    height: 60px;
+    color: black;
+    margin-left: 20px;
+    background-color: white;
+}
+.write_novel {
+    margin-left: 300px;
+}
+.write_novel:hover{
+    border-bottom: 1px solid blue;
+    color: blue;
+}
