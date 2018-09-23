@@ -1,0 +1,49 @@
+
+<% include header.html%>
+
+<li>
+    <h3 class="au-title">作品管理</h3>
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>书名</th>
+                <th>状态</th>
+                <th>最新章节</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let n of books){ %>
+            <tr>
+                <td>
+                    <img src="<%=n.nimg%>" alt="">
+                    <p><%=n.nname%></p>
+                </td>
+                <td><%= n.serial==1?"完结":"连载"%></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+       <%}%>
+        </tbody>
+    </table>
+
+</li>
+
+
+
+
+
+
+
+<li>
+    <h3 class="au-title">作家资料</h3>
+</li>
+
+<% include footer.html %>

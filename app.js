@@ -45,7 +45,7 @@ const diskstorage = multer.diskStorage({
 });
 
 //启动数据库服务  
-const conn = mysql.createConnection({
+global.conn = mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'',
@@ -54,6 +54,15 @@ const conn = mysql.createConnection({
 });
 conn.connect();
 
+//验证码模块
+app.get('/coder', (req, res) => {
+    var captcha = svgCaptcha.create({noise:4,ignoreChars: '0o1i', size:1,background: '#cc9966',height:38, width:90});
+	req.session.coder = captcha.text;
+	
+	res.type('svg'); // 使用ejs等模板时如果报错 res.type('html')
+	res.status(200).send(captcha.data);
+    
+});
 
 //定义各种模块的路由请求
 //首页模块 子路由
@@ -65,6 +74,7 @@ app.use("/author",require("./module/author/author.js"));
 
 
 //静态资源托管文件    static
+app.use('/upload', express.static('upload'));
 app.use(express.static("static"));
 
 //端口监听
