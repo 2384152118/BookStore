@@ -71,6 +71,7 @@ router.get('/index', (req, res) => {
 });
 
 
+
 //作家登录请求 post
 router.post("/alogin", (req, res) => {
     let d = req.body;
@@ -216,15 +217,174 @@ router.post('/upload', upload.single('images'), (req, res) => {
 
 //作者查看小说
 router.get('/look', (req, res) => {
-    res.render('author/look');
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
+    data.asex = req.session.asex;
+    data.atel = req.session.atel;
+    data.aemail = req.session.aemail;
+    data.address = req.session.address;
+
+    let arr = []; //用来存放所有小说的id;
+
+    async.waterfall([
+        function (cb) {
+            //根据作家id查找该作者的所以小说
+            let sql = 'SELECT * FROM novel WHERE aid= ?';
+            let aid = JSON.parse(data.aid);
+            conn.query(sql, aid, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < results.length; i++) {
+                    arr.push(results[i].nid);
+                }
+                cb(null, results);
+            })
+        },
+        function (re, cb) {
+            //根据小说id查找该小说的所有章节
+            let str = JSON.stringify(arr);
+            let newstr = str.replace('[', '(').replace(']', ')');
+            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
+            conn.query(sql, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < re.length; i++) {
+                    let section = [];
+                    for (let j = 0; j < results.length; j++) {
+                        if (re[i].nid == results[j].nid) {
+                            section.push(results[j]);
+                        }
+                    }
+                    re[i].section = JSON.stringify(section);
+                }
+                cb(null, re);
+            })
+        }
+    ], (err, result) => {
+        data.books = result;
+        console.log(data);
+        res.render('author/look', data);
+    });
 })
 //创建小说
 router.get('/write_novel', (req, res) => {
-    res.render('author/write_novel');
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
+    data.asex = req.session.asex;
+    data.atel = req.session.atel;
+    data.aemail = req.session.aemail;
+    data.address = req.session.address;
+
+    let arr = []; //用来存放所有小说的id;
+
+    async.waterfall([
+        function (cb) {
+            //根据作家id查找该作者的所以小说
+            let sql = 'SELECT * FROM novel WHERE aid= ?';
+            let aid = JSON.parse(data.aid);
+            conn.query(sql, aid, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < results.length; i++) {
+                    arr.push(results[i].nid);
+                }
+                cb(null, results);
+            })
+        },
+        function (re, cb) {
+            //根据小说id查找该小说的所有章节
+            let str = JSON.stringify(arr);
+            let newstr = str.replace('[', '(').replace(']', ')');
+            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
+            conn.query(sql, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < re.length; i++) {
+                    let section = [];
+                    for (let j = 0; j < results.length; j++) {
+                        if (re[i].nid == results[j].nid) {
+                            section.push(results[j]);
+                        }
+                    }
+                    re[i].section = JSON.stringify(section);
+                }
+                cb(null, re);
+            })
+        }
+    ], (err, result) => {
+        data.books = result;
+        console.log(data);
+        res.render('author/write_novel',data);
+    });
 })
 //写章节 
 router.get('/write_section', (req, res) => {
-    res.render('author/write_section');
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
+    data.asex = req.session.asex;
+    data.atel = req.session.atel;
+    data.aemail = req.session.aemail;
+    data.address = req.session.address;
+
+    let arr = []; //用来存放所有小说的id;
+
+    async.waterfall([
+        function (cb) {
+            //根据作家id查找该作者的所以小说
+            let sql = 'SELECT * FROM novel WHERE aid= ?';
+            let aid = JSON.parse(data.aid);
+            conn.query(sql, aid, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < results.length; i++) {
+                    arr.push(results[i].nid);
+                }
+                cb(null, results);
+            })
+        },
+        function (re, cb) {
+            //根据小说id查找该小说的所有章节
+            let str = JSON.stringify(arr);
+            let newstr = str.replace('[', '(').replace(']', ')');
+            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
+            conn.query(sql, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < re.length; i++) {
+                    let section = [];
+                    for (let j = 0; j < results.length; j++) {
+                        if (re[i].nid == results[j].nid) {
+                            section.push(results[j]);
+                        }
+                    }
+                    re[i].section = JSON.stringify(section);
+                }
+                cb(null, re);
+            })
+        }
+    ], (err, result) => {
+        data.books = result;
+        console.log(data);
+        res.render('author/write_section',data);
+    });
 })
 //完结状态
 router.post('/overbook', (req, res) => {
