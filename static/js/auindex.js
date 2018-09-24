@@ -17,24 +17,51 @@ $(function(){
 
     //点击书查看内容
     $('.look').on('click','img',function(){
-        window.location.href="/author/look";
+        let nid=$(this).parent().parent().children().first().html();
+        let nname=$(this).next().html();
+        
+        $.ajax({
+            url: '/author/look',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {nid:nid,nname:nname},
+            success: function (result) {
+                if(result.r == 'ok'){
+                    window.location.href = '/author/look';
+                }
+            }
+        });
     })
 
     //创建新章节 
     $('.look').on('click','.write_section',function(){
-        window.location.href="/author/write_section";
+        let nid=$(this).parent().parent().children().first().html();
+        let nname=$(this).parent().parent().children().eq(1).children().last().html();
+        $.ajax({
+            url: '/author/write_section',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {nid:nid,nname:nname},
+            success: function (result) {
+                if(result.r == 'ok'){
+                    window.location.href = '/author/write_section';
+                }
+            }
+        });
     })
 
     //完结书 
     $('.look').on('click','.overbook',function(){
-        let nid=$('#nid').html();
+        let nid=$(this).parent().parent().children().first().html();
         $.ajax({
             url: '/author/overbook',
             type: 'POST',
             dataType: 'JSON',
             data: {nid:nid,serial:1},
             success: function (result) {
-                console.log(result);
+                if(result.r == 'ok'){
+                    window.location.href = '/author/index';
+                }
             }
         });
     })

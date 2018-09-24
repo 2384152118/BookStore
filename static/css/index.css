@@ -444,3 +444,20 @@ span{
     background-color: white;
     color: black;
 }
+.write_section {
+    margin-bottom: 10px;
+}
+#w-sec-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 270px;
+}
+.sec-text {
+    width: 940px;
+    height: 430px;
+    margin-left: -75px;
+    margin-top: 10px;
+}
+.section-name {
+    margin-left: 10px;
+}

@@ -1,3 +1,30 @@
 <% include header.html%>
-查看该小说
+<li>
+    <h3 class="au-title"><%=nname%></h3>
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>章节ID</th>
+                <th>章节序号</th>
+                <th>章节名</th>
+                <th>创建时间</th>
+            </tr>
+        </thead>
+        <tbody class="look">
+            <% for(let s of book){ %>
+            <tr>
+                <th><%=s.sid%></th>
+                <th>第<%=s.sortnum%>章</th>
+                <th><%=s.sname%></th>
+                <th><%=s.sdatetime%></th>
+            </tr>
+            <%}%>
+        </tbody>
+    </table>
+</li>
 <% include footer.html %>

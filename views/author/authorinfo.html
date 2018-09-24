@@ -1,0 +1,55 @@
+<% include header.html%>
+
+<li>
+    <h3 class="au-title">作家资料</h3>
+    <div class="self">
+        <form action="" method="post" id="auinfo" enctype="multipart/form-data">
+            <label class="layui-form-label">头像：</label>
+            <label for="images" class="header">
+                <img src=<%=aimg%> class="logo" /><br />
+            </label>
+            <input type="file" name="images" id="images" style="display:none">
+            <input type="hidden" value="" id="imgval">
+
+            <div class="layui-form-item myinfo">
+                <label class="layui-form-label">笔名：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="aname" required lay-verify="required" autocomplete="off" class="layui-input"
+                        value=<%=aname%>>
+                </div><br />
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别：</label>
+                    <div class="layui-input-block au-sex">
+                        <input type="radio" name="sex" value="男" title="男"> 男
+                        <input type="radio" name="sex" value="女" title="女"> 女
+                        <input type="radio" name="sex" value="保密" title="保密" checked=""> 保密
+                    </div>
+                </div>
+
+                <label class="layui-form-label">电话号码：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="atel" required lay-verify="required" autocomplete="off" class="layui-input"
+                        value=<%=atel%>>
+                </div><br />
+
+                <label class="layui-form-label">邮箱：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="aemail" required lay-verify="required" autocomplete="off" class="layui-input"
+                        value=<%=aemail%>>
+                </div><br />
+
+                <label class="layui-form-label">地址：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" required lay-verify="required" autocomplete="off" class="layui-input"
+                        value=<%=address%>>
+                </div><br />
+        </form>
+        <br />
+        <br />
+
+    </div>
+    <button class="sure" type="button">确定保存</button>
+</li>
+
+<% include footer.html %>

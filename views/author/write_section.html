@@ -1,3 +1,31 @@
 <% include header.html%>
-写章节
+<li>
+    <h3 class="au-title write_section">
+        <%=nname%>
+    </h3>
+    <div>
+        <form action="" method="post" id="auinfo" enctype="multipart/form-data">
+            <div class="section-name">
+                <div class="layui-inline">
+                    <label class="layui-form-label">章节序号：</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="sortnum" lay-verify="required|phone" autocomplete="off" class="layui-input"
+                            value="第<%= book.length+1 %>章">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">章节名：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sname" placeholder="请输入章节名" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-input-block">
+                <textarea name="text" placeholder="请输入内容" class="layui-textarea sec-text"></textarea>
+            </div><br />
+        </form>
+        <button class="sure" id="w-sec-btn" type="button">确定保存</button>
+    </div>
+</li>
 <% include footer.html %>
