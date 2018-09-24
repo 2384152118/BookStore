@@ -70,6 +70,64 @@ router.get('/index', (req, res) => {
     });
 });
 
+//作家专区  作家资料
+router.get('/authorinfo', (req, res) => {
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
+    data.asex = req.session.asex;
+    data.atel = req.session.atel;
+    data.aemail = req.session.aemail;
+    data.address = req.session.address;
+
+    let arr = []; //用来存放所有小说的id;
+
+    async.waterfall([
+        function (cb) {
+            //根据作家id查找该作者的所以小说
+            let sql = 'SELECT * FROM novel WHERE aid= ?';
+            let aid = JSON.parse(data.aid);
+            conn.query(sql, aid, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < results.length; i++) {
+                    arr.push(results[i].nid);
+                }
+                cb(null, results);
+            })
+        },
+        function (re, cb) {
+            //根据小说id查找该小说的所有章节
+            let str = JSON.stringify(arr);
+            let newstr = str.replace('[', '(').replace(']', ')');
+            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
+            conn.query(sql, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < re.length; i++) {
+                    let section = [];
+                    for (let j = 0; j < results.length; j++) {
+                        if (re[i].nid == results[j].nid) {
+                            section.push(results[j]);
+                        }
+                    }
+                    re[i].section = JSON.stringify(section);
+                }
+                cb(null, re);
+            })
+        }
+    ], (err, result) => {
+        data.books = result;
+        console.log(data);
+        res.render('author/authorinfo', data);
+    });
+});
+
 
 
 //作家登录请求 post
