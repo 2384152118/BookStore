@@ -1,0 +1,52 @@
+
+.total {
+	width: 440px;
+	height: 350px;
+	margin: 100px auto;
+	border: 1px solid gainsboro;
+}
+.adminlogin {
+	width: 450px;
+	margin: 50px auto;
+}
+.yanzhengma {
+	width: 110px;
+}
+#codeimg {
+	margin-top: -9px;
+	margin-left: -60px;
+}
+.right{	
+	position: absolute;
+ 	left: 600px;
+}
+.layui-layout-admin .layui-header {
+    background-color: rgb(93,145, 77);
+   /*background-image: url(../img/adminbg.gif);*/
+}
+.admin_aside {
+	margin-top: 10px;
+}
+.adminlogo img {
+	margin-top: -20px;
+	width: 240px;
+	height: 112px;
+}
+.admin_content {
+	border: 1px solid #393D49;
+	padding: 15px;
+	margin: 10px;
+}
+.admintitle {
+	/*display: inline-block;*/
+	height: 60px;
+	line-height: 60px;
+	width: 60%;
+	margin-left: 220px;
+	color: lightgray;
+	font-family: "楷体";
+}
+.admin_footer {
+	width: 35%;
+	margin: 0 auto;
+}
