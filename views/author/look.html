@@ -1,6 +1,8 @@
 <% include header.html%>
 <li>
-    <h3 class="au-title"><%=nname%></h3>
+    <h3 class="au-title">
+        <%=nname%>
+    </h3>
     <table class="layui-table">
         <colgroup>
             <col width="150">
@@ -15,13 +17,22 @@
                 <th>创建时间</th>
             </tr>
         </thead>
-        <tbody class="look">
+        <tbody class="look _look">
             <% for(let s of book){ %>
             <tr>
-                <th><%=s.sid%></th>
-                <th>第<%=s.sortnum%>章</th>
-                <th><%=s.sname%></th>
-                <th><%= s.sdatetime%></th>
+                <th>
+                    <a href="/author/_look?sid=<%=s.sid%>">
+                        <%=s.sid%>
+                    </a>
+                </th>
+                <th><a href="/author/_look?sid=<%=s.sid%>">第
+                        <%=s.sortnum%>章</a></th>
+                <th><a href="/author/_look?sid=<%=s.sid%>">
+                        <%=s.sname%></a>
+                </th>
+                <th>
+                    <%= s.sdatetime%>
+                </th>
             </tr>
             <%}%>
         </tbody>

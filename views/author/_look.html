@@ -1,0 +1,34 @@
+<% include header.html%>
+<li>
+    <h3 class="au-title write_section">
+        <%=book.nname%>
+    </h3>
+    <div>
+        <form action="" method="post" id="write_section" enctype="multipart/form-data">
+            <div class="section-name">
+                <div class="layui-inline">
+                    <label class="layui-form-label">章节序号：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sort" autocomplete="off" class="layui-input"
+                            value="第<%= book.sortnum %>章">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">章节名：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sname" placeholder="请输入章节名" lay-verify="email" autocomplete="off" class="layui-input" value="<%= book.sname %>">
+                    </div>
+                </div>
+                <input type="text" name="nid" autocomplete="off" class="layui-input" value="<%= book.nid %>" style="display: none;">
+                <input type="text" name="nname" autocomplete="off" class="layui-input" value="<%= book.nname %>" style="display: none;">
+                <input type="text" name="sid" autocomplete="off" class="layui-input" value="<%= book.sid %>" style="display: none;">
+                <input type="text" name="sortnum" autocomplete="off" class="layui-input" value="<%= book.sortnum %>" style="display: none;">
+            </div>
+            <div class="layui-input-block">
+                <textarea name="text" placeholder="请输入内容" class="layui-textarea sec-text"><%= book.text %></textarea>
+            </div><br />
+            <button class="sure layui-btn layui-btn-primary" id="w-sec-btn" type="button"  lay-submit lay-filter="see_section">确定保存</button>
+        </form>
+    </div>
+</li>
+<% include footer.html %>

@@ -119,7 +119,7 @@ router.get('/authorinfo', (req, res) => {
         }
     ], (err, result) => {
         data.books = result;
-        console.log(data);
+        // console.log(data);
         res.render('author/authorinfo', data);
     });
 });
@@ -135,8 +135,8 @@ router.post("/alogin", (req, res) => {
         return;
     }
     //进行数据验证
-    let sql = 'SELECT * FROM author WHERE aname = ? AND apassword = ?';
-    conn.query(sql, [d.aname, d.apassword], (err, result) => {
+    let sql = 'SELECT * FROM author WHERE aname = ?';
+    conn.query(sql,d.aname, (err, result) => {
         // console.log(result);
         //账号是不是存在
         if (!result.length) {
@@ -299,6 +299,57 @@ router.post('/look', (req, res) => {
     })
 
 })
+
+//修改章节内容
+router.get('/_look',(req,res)=>{
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
+    let book = req.session.data.book;
+
+    let sid=req.query.sid;
+    for(let i=0;i<book.length;i++){
+        if(book[i].sid==sid){
+            data.book=book[i];
+            res.render('author/_look', data);
+        }
+    }
+})
+
+//章节添加到数据库
+router.post('/update_section', (req, res) => {
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
+    let d = req.body;
+
+    //章节名不能为空
+    if(d.sname==""){
+        res.json({
+            r: 'sname_is_empty'
+        });
+        return ;
+    }
+    //判断正确 修改数据库
+    let sql = 'UPDATE section set sname=?,sortnum=?,sdatetime=?,text=?,aid=?,aname=?,nid=?,nname=? WHERE sid=?';
+    let arr = [d.sname,d.sortnum,new Date().toLocaleString(),d.text,data.aid,data.aname,d.nid,d.nname,d.sid];
+    conn.query(sql, arr, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.json({
+                r: 'db_err'
+            });
+            return;
+        }
+        res.json({
+            r: 'ok'
+        });
+    })
+})
+
+
 //到写章节页面 
 router.get('/write_section', (req, res) => {
     let data = req.session.data;

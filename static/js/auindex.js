@@ -33,6 +33,27 @@ $(function(){
         });
     })
 
+    //修改章节
+    var form = layui.form;
+    form.on('submit(see_section)', function(data){
+        $.ajax({
+            url: '/author/update_section',
+            type: 'POST',
+            dataType: 'JSON',
+            data: $('#write_section').serialize(),
+            success: function (result) {
+                if(result.r == 'sname_is_empty'){
+                    alert("章节名不能为空！");
+                    return ;
+                 }
+                if(result.r == 'ok'){
+                    alert("章节修改成功");
+                }
+            }
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+      });
+
     //创建新章节 
     $('.look').on('click','.write_section',function(){
         let nid=$(this).parent().parent().children().first().html();
