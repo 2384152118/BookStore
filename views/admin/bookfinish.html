@@ -1,13 +1,12 @@
 <% include head.html%>
+
 <div class="layui-body">
 	<div class="admin_content">
-	<!--<div class="layui-body admin_content">-->
-		<!--<span class="layui-breadcrumb">
-        <a href="/admin">首页</a>
-        <a href="/admin/category">分类管理</a>
-        <a><cite>分类列表</cite></a>
-    </span>-->
+		<span class="layui-breadcrumb">
+        <a href="/admin" style="font-size: 16px; font-weight: bold; display: block; margin-top: 10px;"><<返回首页</a>
+    </span>
 		<hr>
+
 		<table class="layui-table  mytable ">
 			<colgroup>
 				<col width="100">
@@ -27,19 +26,9 @@
 					<th>操作</th>
 				</tr>
 			</thead>
-			
-			<!--<tbody>
-				<tr>
-					<th>12</th>
-					<th>213</th>
-					<th>54</th>
-					<th>75</th>
-					<th>添加45时间</th>
-					<th>77</th>
-				</tr>
-			</tbody>-->
-			<tbody>
-				<% for (let n of booklist){ %>
+
+			<tbody class="bookfinish_tbody">
+				<% for (let n of booklist){%>
 				<tr>
 					<td>
 						<%=n.nid%>
@@ -58,14 +47,38 @@
 					</td>
 					<td>
 						<a href="javascript:;" class="delbook" nid="<%=n.nid%>">删除</a>
-						
 
 					</td>
 				</tr>
 				<%}%>
 			</tbody>
+
 		</table>
+		<nav aria-label="Page navigation">
+
+			<ul class="pagination">
+				<li>
+					<a href="/admin/bookfinish?page=<%=page-1%>" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<% for(let p=start; p<=end; p++){ %>
+				<li<%- (page==p)?( ' class="active"'): ''%>>
+					<a href="/admin/bookfinish?page=<%=p%>">
+						<%=p%>
+					</a>
+					</li>
+					<% } %>
+					<li>
+						<a href="/admin/bookfinish?page=<%=(page*1+1 > totalpage) ? totalpage:(page*1+1) %>" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+			</ul>
+		</nav>
+
 	</div>
+
 </div>
-<!--</div>-->
+
 <% include foot.html%>

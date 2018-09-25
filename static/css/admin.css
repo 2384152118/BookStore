@@ -1,5 +1,4 @@
-
-.total {
+.admin_total {
 	width: 440px;
 	height: 350px;
 	margin: 100px auto;
@@ -9,7 +8,7 @@
 	width: 450px;
 	margin: 50px auto;
 }
-.yanzhengma {
+.admin_total .yanzhengma {
 	width: 110px;
 }
 #codeimg {
@@ -33,9 +32,10 @@
 	height: 112px;
 }
 .admin_content {
-	border: 1px solid #393D49;
-	padding: 15px;
+	/*border: 1px solid #393D49;*/
+	padding: 20px;
 	margin: 10px;
+	margin-left: 0;
 }
 .admintitle {
 	/*display: inline-block;*/
@@ -47,6 +47,6 @@
 	font-family: "楷体";
 }
 .admin_footer {
-	width: 35%;
+	width: 45%;
 	margin: 0 auto;
 }

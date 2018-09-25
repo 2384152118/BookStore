@@ -1,11 +1,14 @@
 <% include head.html%>
 <div class="layui-body">
 	<div class="admin_content">
+		<span class="layui-breadcrumb">
+        <a href="/admin" style="font-size: 16px; font-weight: bold; display: block; margin-top: 10px;"><<返回首页</a>
+    </span>
+		<hr>
 		<table class="layui-table  authortable ">
 			<colgroup>
 				<col width="150">
-				<col width="200">
-				<col width="200">
+				<col width="300">
 				<col width="300">
 				<col width="300">
 				<col>
@@ -16,7 +19,6 @@
 					<th>作者名字</th>
 					<th>Tel</th>
 					<th>email</th>
-					<th>写过的小说</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -37,16 +39,37 @@
 						<%=a.aemail%>
 					</td>
 					<td>
-						1
-					</td>
-					<td>
-						<a href="javascript:;" class="readerstop" aid="<%=a.aid%>">删除</a>
+						<a href="javascript:;" class="readerstop" aid="<%=a.aid%>">禁止登录</a>
 					</td>
 				</tr>
 				<%}%>
 			</tbody>
 			
 		</table>
+		<nav aria-label="Page navigation">
+
+			<ul class="pagination">
+				<li>
+					<a href="/admin/authormanage?page=<%=page-1%>" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<% for(let p=start; p<=end; p++){ %>
+				<li<%- (page==p)?( ' class="active"'): ''%>>
+					<a href="/admin/authormanage?page=<%=p%>">
+						<%=p%>
+					</a>
+					</li>
+					<% } %>
+					<li>
+						<a href="/admin/authormanage?page=<%=(page*1+1 > totalpage) ? totalpage:(page*1+1) %>" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+			</ul>
+		</nav>
 	</div>
+	<!--<button  class="layui-btn layui-btn-radius layui-btn-primary"> <a href="/admin/authormanage">上一页</a></button>-->
+<!--<button  class="layui-btn layui-btn-radius layui-btn-primary"> <a href="/admin/authormanage">下一页</a></button>-->	
 </div>
 <% include foot.html%>

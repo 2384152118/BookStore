@@ -1,5 +1,22 @@
 $(function() {
-
+	//退出操作
+//	$('.esc').on('click',function(){
+//		$.ajax({
+//				url: '/admin/login',
+//				type: 'GET',
+//				dataType: 'JSON',
+//				data: {
+//					nid: nid
+//				},
+//				success: function(result) {
+//					console.log(result);
+//					if(result.r == 'success') {
+//						window.location.reload();
+//					}
+//				}
+//			});
+//	})
+//	
 	//完结书本删除
 	$('.mytable').on('click', '.delbook', function() {
 		console.log($(this).attr('nid'));

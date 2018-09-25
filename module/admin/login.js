@@ -32,6 +32,8 @@ router.post('/', (req, res)=>{
         //保存session信息
         req.session.adminid = result[0].adminid;
         req.session.adminname = result[0].adminname;
+//      console.log(req.session.adminid);
+//      console.log(req.session.adminname);
         
         res.json({r:'ok'})
     });
