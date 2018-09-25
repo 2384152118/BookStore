@@ -1,0 +1,32 @@
+<% include header.html%>
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-container" id="section">
+        <ul class="text">
+            <% for(let n of noveltype){%>
+            <div class="layui-card">
+                <div class="layui-card-body n-card card">
+                    <li>
+                        <img data-nid="<%=n.nid%>" class='n-leftn-left' src="<%=n.nimg%>" alt="">
+                        <h4><%=n.nname%></h4>
+                        <span class="layui-breadcrumb usearch">
+                            <a href=""><%=n.aname%></a>
+                            <a href=""><%=n.noveltype%></a>
+                            <a href=""><%=n.serial==0?"连载":"完结"%></a>
+                        </span>
+                        <p class="uinfo"><%=n.info%></p>
+                        <p class="uupdate">最新更新：</p>
+                        <p class="uda"><%=n.ndatetime.slice(0,10) %></p>
+                        <div class="uright">
+                            <p id="free"><img data-nid="<%=n.nid%>" src="/img/free.png" alt=""></p>
+                            <p id="joinbook" data-novelid="<%=n.nid%>">加入书架</p>
+                        </div>
+                    </li>
+                </div>
+            </div>
+            <%}%>
+
+        </ul>
+    </div>
+</div>
+
+<% include footer.html%>

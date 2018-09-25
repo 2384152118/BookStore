@@ -75,7 +75,6 @@ app.use('/admin/login', require('./module/admin/login'));
 app.use('/admin', require('./module/admin/index'));
 
 
-
 //静态资源托管文件    static
 app.use('/upload', express.static('upload'));
 app.use(express.static("static"));

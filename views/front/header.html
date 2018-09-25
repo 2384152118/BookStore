@@ -4,24 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>头部</title>
+    <title>银杏文学网站</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="icon" href="/img/ico.png" type="img/x-ico">
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/section.js"></script>
+    
 </head>
 
 <body >
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header header1">
-            <img src="/img/logo.png"  alt="">
+            <img class="img" src="/img/logo.png"  alt="">
             <div id="box">
                     <input type="text" name="search" placeholder="请输入关键字">
-                    <div id="search">搜索</div> 
+                    <button class="layui-btn" type="button" id="search">搜索</button>
             </div>
             <div id="login1">
                 <ul>
-                    <li id="user1"><a href= <%= uid?"/mycenter":"/ulogin"%> ><%- uid?"<img id='userimg' src='/img/user.jpg'>":"登录"%></a> </li>
-                    <li id="user1">&nbsp;<a href=<%= username?"/mycenter":"/userlogin"%>><%= username?username:"注册"%></a></li>
+                    <li  class="<%= uid?"user1":"userimg userimg1"%>"><a href= <%= uid?"/mycenter":"/ulogin"%> ><%- uid?"<img  src='/img/user.jpg'>":"登录"%></a> </li>
+                    <li  class="<%= username?"user1":"userimg"%>"><a href=<%= username?"/mycenter":"/userlogin"%>><%= username?username:"注册"%></a></li>
                 </ul>
             </div>
         </div>
@@ -34,6 +37,6 @@
             <li class="layui-nav-item"><a href="/modern">现代言情</a></li>
             <li class="layui-nav-item"><a href="/xianxia">玄幻仙侠</a></li>
             <li class="layui-nav-item"><a href="xuanyi">悬疑灵幻</a></li>
-            <li class="layui-nav-item author"><a href="/author">作者专区</a></li>
+            <li class="layui-nav-item admin"><a href="/author">作者专区</a></li>
         </ul>
     </div>

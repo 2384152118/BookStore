@@ -13,8 +13,16 @@ $(function () {
             data: $('#userlogin').serialize(),
             success: function (result) {
                 console.log(result);
+                if(result.r == 'coder_err'){
+                    alert("验证码错误！");
+                    return ;
+                }
                 if(result.r == 'u_not'){
-                    $('input[name="username"]').parent().next('.layui-form-mid').html('账号不存在');
+                    alert("用户不存在！");
+                    return ;
+                }
+                if(result.r == 'p_err'){
+                    alert("密码错误！");
                     return ;
                 }
                 if(result.r == 'ok'){

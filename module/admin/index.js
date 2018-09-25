@@ -42,12 +42,11 @@ router.get('/readermanage', (req, res) => {
 
 router.get('/authormanage', (req, res) => {
 	let data = {};
-	let sql = 'SELECT * FROM author WHERE authorstatus=1';
+	let sql = 'SELECT * FROM author WHERE authorstatus = 1';
 	conn.query(sql, (err, results) => {
 		data.authorlist = results;
 		res.render('admin/authormanage', data);
 		console.log(data);
-
 	});
 
 });
@@ -64,8 +63,8 @@ router.get('/bookfinish', (req, res) => {
 	conn.query(sql, (err, results) => {
 		data.booklist = results;
 		res.render('admin/bookfinish', data);
-		//		console.log(data);
-
+//		console.log(data);
+		
 	});
 
 });

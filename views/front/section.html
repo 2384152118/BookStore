@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title><%= novellist[0].nname%></title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/zhangjie.css">
+    <link rel="icon" href="/img/ico.png" type="img/x-ico">
+    <script src="/layui/layui.all.js"></script>
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/section.js"></script>
+</head>
+<body>
+    <div class="container">
+        <span class="layui-breadcrumb">
+            <a href="">首页></a>
+            <a href=""><%= novellist[0].noveltype%>></a>
+            <a href=""><%= novellist[0].nname%></a>
+          </span>
+          <div class="fengmian">
+            <div class="fengmian1">
+                <div class="book-photo">
+                    <img src="<%= novellist[0].nimg%>">
+                </div>
+                <h1><%= novellist[0].nname%></h1>
+                <h2><%= novellist[0].aname%>著</h2>
+                <div class="info-list cf">
+                    <ul>
+                        <li><p><%= novellist[0].noveltype%></p><span>类型</span></li>
+                        <li><p><%= novellist[0].ndatetime.getFullYear() + '-' + (novellist[0].ndatetime.getMonth() + 1) + '-' + novellist[0].ndatetime.getDate()%></p><span>上架</span></li>
+                        <li><p>2228101</p><span><%=novellist[0].serial==0?"连载中":"完结"%></span></li>
+                    </ul>
+                </div>
+                <h5>本书由银杏文学网进行电子制作与发行</h5>
+                <h6>©版权所有 侵权必究</h6>
+            </div>
+          </div>
+            <div class="content">
+                <h2 id="h2">第<%=page%>章:&nbsp;<%=length==0?"暂无章节":section[page-1].sname%></h2>
+                <p class="content2"><%- length==0?"暂无章节":section[page-1].text.replace(/\r\n/g,'<br>')%></p>
+            </div>
+          <div id="pages"></div>
+    </div>
+    <script>
+        var laypage = layui.laypage;
+        //执行一个laypage实例
+        laypage.render({
+          elem: 'pages',
+          count: <%= count%>,//3
+          limit:<%= pagenum%>,//1
+          curr:<%= page%>,//1
+          groups:0,
+          jump: function(obj, first){
+              //首次不执行
+              if(!first){
+              window.location.href="/section?page=" + obj.curr;
+              }
+          }
+        });
+      </script>
+</body>
+</html>

@@ -8,6 +8,7 @@ router.get('/', (req, res)=>{
     let data={};
     data.uid=req.session.uid;
     data.username=req.session.username;
+    console.log(req.body);
     let sql = 'SELECT * FROM novel';
     conn.query(sql, (err, results)=>{
         data.novellist=results;
@@ -87,7 +88,7 @@ router.post("/front/ulogin", (req, res) => {
         return ;
     }
     //进行数据验证
-    let sql = 'SELECT * FROM user WHERE username = ? AND upasswd = ?';
+    let sql = 'SELECT * FROM user WHERE username = ? ';
     conn.query(sql, [d.username,d.upasswd], (err, result)=>{
         // console.log(result);
         //账号是不是存在
@@ -122,7 +123,11 @@ router.get("/final",(req, res)=>{
     let info={};
     info.uid=req.session.uid;
     info.username=req.session.username;
+    let sql = 'SELECT * FROM novel WHERE serial= 1';
+    conn.query(sql, (err, results)=>{
+        info.novellist=results;
     res.render("front/final",info);
+    });
 })
 //古代言情  路由
 router.get("/ancient",(req, res)=>{
@@ -168,8 +173,75 @@ router.get("/xuanyi",(req, res)=>{
     res.render("front/xuanyi",info);
     });
 })
+//个人中心
+router.post("/front/join",(req, res)=>{
+    let d = req.body;
+    req.session.novelid=d.novelid;
+    let sql = 'UPDATE novel SET nstatus=1 WHERE nid=?';
+    conn.query(sql, d.novelid, (err, result)=>{
+        res.json({r:"ok"});
+    })
+})
 router.get("/mycenter",(req, res)=>{
-    res.render("front/mycenter")
+    let info={};
+    info.uid=req.session.uid;
+    info.username=req.session.username;
+    let sql = 'SELECT * FROM novel WHERE nstatus=1';
+    conn.query(sql,  (err, result)=>{
+        info.novel=result;
+        console.log(info.novel);
+        res.render("front/mycenter",info);
+    })
+})
+//章节页面
+router.post("/front/section",(req,res)=>{
+    let d = req.body;
+    req.session.nid=d.nid;
+    let sql = 'SELECT * FROM section where  nid= ? ';
+    conn.query(sql,d.nid, (err, result)=>{
+        req.session.section = result;
+        console.log(result);
+        res.json({r:"ok"});
+    })
+})
+router.get("/section",(req, res)=>{
+    let data={};
+    data.section=req.session.section;
+    data.nid=req.session.nid;
+    data.count = data.section.length;
+    data.length=data.section.length;
+    //实现分页
+    //当前页数
+    let pagenum = 1;
+    data.pagenum = pagenum;
+    //当前页
+    let page = req.query.page ? req.query.page : 1;
+    data.page = page;
+    let sql = 'SELECT * FROM novel where  nid= ? ';
+    conn.query(sql,data.nid, (err, result)=>{
+        data.novellist=result;
+        res.render("front/section",data);
+    })
+    
+
+})
+//用户搜索  发起ajax请求获取value值 并将value值保存在session中
+router.post("/front/search",(req, res)=>{
+    let d = req.body;
+    // console.log(d);
+    let sql = 'SELECT * FROM novel where  noveltype like ? or keywords like ? ';
+    conn.query(sql,[`%${d.noveltype}%`,`%${d.noveltype}%`], (err, result)=>{
+        req.session.noveltype = result;
+        res.json({r:"ok"});
+    })
+})
+//将session里面的值取出来放进data对象里 并传给前端
+router.get("/search",(req,res)=>{
+    let data={};
+    data.uid=req.session.uid;
+    data.username=req.session.username;
+    data.noveltype=req.session.noveltype;
+    res.render("front/search",data);
 })
 //导出子路由 
 module.exports = router;

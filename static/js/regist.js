@@ -13,10 +13,14 @@ $(function () {
             data: $('#userregist').serialize(),
             success: function (result) {
                 console.log(result);
-                // if(result.r == 'u_not'){
-                //     $('input[name="username"]').parent().next('.layui-form-mid').html('账号不存在');
-                //     return ;
-                // }
+                if(result.r == 'coder_err'){
+                    alert("验证码错误！");
+                    return ;
+                }
+                if(result.r == 'u_has'){
+                    alert("用户已存在！");
+                    return ;
+                }
                 if(result.r == 'ok'){
                     window.location.href = '/ulogin';
                 }

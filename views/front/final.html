@@ -1,3 +1,25 @@
 <% include header.html%>
-    完结
+<div>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15" id="section">
+                <% for(let n of novellist){%>
+                <div class="layui-col-md4">
+                    <div class="layui-card">
+                        <div data-nid="<%=n.nid%>" class="layui-card-body n-card">
+                            <img data-nid="<%=n.nid%>" class='n-leftn-left' src="<%=n.nimg%>" alt="">
+                            <div class='n-right'>
+                                <h3><a href="#"><%=n.nname%></a></h3>
+                                <p><%=n.info%></p>
+                                <div class="n-card-footer">
+                                    <p class="n-card-author"><%=n.aname%></p>
+                                    <p class="n-card-type"><%=n.noveltype%></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+            </div>
+        </div>
+    </div>
 <% include footer.html%>

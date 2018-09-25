@@ -1,0 +1,101 @@
+.container {
+    width: 760px;
+    margin: 0 auto;
+}
+.layui-breadcrumb {
+    visibility: visible;
+    display: block;
+    padding-top: 30px;
+}
+.fengmian {
+    height: 600px;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px solid #d8d8d8;
+}
+.content {
+    margin-top: 30px;
+    text-indent: 2em;
+    border: 1px solid #d8d8d8;
+}
+.fengmian1 {
+    width: 740px;
+    height: 580px;
+    border: 1px solid #d8d8d8;
+    margin: 10px auto;
+}
+.book-photo img{
+    width: 128px;
+    height: 168px;
+    margin: 64px auto 24px;
+    background: #fffbf2;
+}
+.fengmian1 h1 {
+    font: 32px/45px PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
+    overflow: hidden;
+    height: 45px;
+    margin-bottom: 7px;
+}
+.fengmian1 h2{
+    font: 14px/26px PingFangSC-Regular,'-apple-system',Simsun;
+    overflow: hidden;
+    height: 26px;
+    margin-bottom: 48px;
+    color: rgba(0,0,0,.4);
+}
+.info-list {
+    width: 430px;
+    margin: 0 auto 90px;
+}
+.cf ul{
+    width: 430px;
+    height: 48px;
+    margin-left: 40px;
+}
+.cf li {
+    width: 101px;
+    height: 47px;
+    float: left;
+    margin-right: 40px;
+}
+.cf p {
+    font-size: 18px;
+    font-family: "微软雅黑";
+}
+.cf span {
+    color: rgba(0,0,0,.4);
+    font-family: "微软雅黑";
+}
+.fengmian1 h5{
+    display: block;
+}
+.fengmian1 h6{
+    display: block;
+}
+#h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+.content2 {
+    width: 730px;
+    margin: 0 auto;
+    margin-top: 30px;
+    font-size: 20px;
+    font-family:  "微软雅黑";
+}
+#pages>div{
+    margin-left: 150px;
+}
+#pages>div>a{
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    margin-right: 200px;
+    color: white;
+    font-size: 18px;
+    background-color: rgb(93,145, 77);
+}
+#pages>div>span {
+    display: none;
+}
