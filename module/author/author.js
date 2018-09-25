@@ -83,7 +83,7 @@ router.get('/authorinfo', (req, res) => {
         function (cb) {
             //根据作家id查找该作者的所以小说
             let sql = 'SELECT * FROM novel WHERE aid= ?';
-            let aid = JSON.parse(data.aid);
+            let aid = data.aid;
             conn.query(sql, aid, (err, results) => {
                 if (err) {
                     console.log(err);
@@ -239,30 +239,6 @@ router.post("/regist", (req, res) => {
         });
 
     });
-});
-
-// 上传文件的文件夹设置
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) { //存放路径
-        //按照月份存放文件
-        cb(null, `./upload/${new Date().getFullYear()}/${(new Date().getMonth()+1).toString().padStart(2, '0')}`);
-    },
-    filename: function (req, file, cb) { //文件命名
-        let filename = new Date().valueOf() + '_' + Math.random().toString().substr(2, 8) + '.' + file.originalname.split('.').pop();
-        // originalname ：文件的原始名称，包括后缀  0.2365895665468465156  15363008071.45_633055.jpg
-        cb(null, filename)
-    }
-});
-const upload = multer({
-    storage: storage
-});
-
-//作者修改个人信息
-// 接收上传数据  使用第三方模块  multer
-router.post('/upload', upload.single('images'), (req, res) => {
-    console.log(req.body);
-    console.log(req.file);
-    res.json(req.file);
 });
 
 //作者查看小说
@@ -485,5 +461,52 @@ router.post('/overbook', (req, res) => {
         });
     })
 })
+
+
+// 上传文件的文件夹设置
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) { //存放路径
+        //按照月份存放文件
+        cb(null, `./upload/${new Date().getFullYear()}/${(new Date().getMonth()+1).toString().padStart(2, '0')}`);
+    },
+    filename: function (req, file, cb) { //文件命名
+        let filename = new Date().valueOf() + '_' + Math.random().toString().substr(2, 8) + '.' + file.originalname.split('.').pop();
+        // originalname ：文件的原始名称，包括后缀  0.2365895665468465156  15363008071.45_633055.jpg
+        cb(null, filename)
+    }
+});
+const upload = multer({
+    storage: storage
+});
+
+let hostname="http://localhost:81/";
+//作者修改个人信息
+// 接收上传数据  使用第三方模块  multer
+router.post('/upload', upload.single('images'), (req, res) => {
+    console.log(req.file);
+    //把反斜线转成斜线，防止各种转义引起的路径错误
+    req.file.path = hostname + req.file.path.replace(/\\/g, '/');
+    res.json(req.file);
+});
+
+//响应修改管理员信息修改请求
+router.post('/auinfo', (req, res)=>{
+    let d=req.body;
+    let sql='UPDATE author SET aname=?,aimg=?,atel=?,aemail=?,address=? WHERE aid=?';
+    let data=[d.aname,d.aimg,d.atel,d.aemail,d.address,req.session.aid];
+    conn.query(sql,data,function (err,result) {
+        if(err){
+            res.json({r:'db_err'});
+            return;
+        }
+        //成功，更新session信息
+        req.session.aname=d.aname;
+        req.session.aimg=d.aimg;
+        req.session.atel=d.atel;
+        req.session.aemail=d.aemail;
+        req.session.address=d.address;
+        res.json({r:'ok'});
+    })
+});
 
 module.exports = router;

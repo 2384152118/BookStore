@@ -487,5 +487,7 @@ span{
 	margin-left:250px ;
 	color:#fff;
 	background-color: #009688;
-	
+}
+.author-body {
+    background-image: url('/img/authorbg.jpg');
 }

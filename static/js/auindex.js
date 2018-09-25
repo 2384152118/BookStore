@@ -128,34 +128,23 @@ $(function(){
         return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
       });
 
+      
+      //发起修改作者信息请求
+    form.on('submit(auinfo)',function () {
+        $.ajax({
+            url: '/author/auinfo',
+            type: 'POST',
+            dataType: 'JSON',
+            data: $('#auinfo').serialize(),
+            success: function (result) {
+                if (result.r == 'ok') {
+                    alert("修改成功");
+                    window.location.href="/author/authorinfo";
+                }
+            }
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    })
 
-
-    // //上传头像即其他信息
-    // let img = document.querySelector('#images');
-    // //当你选择文件的时候，value值会发生改变，触发change事件
-    // img.onchange = function () {
-    //     //获取选中的文件信息：文件内容
-    //     console.log(this.files[0]);
-    //     let _this = this;
-    //     // 使用ajax发送图片到服务器
-    //     let xhr = new XMLHttpRequest();
-    //     xhr.open('POST', '/author/upload');
-    //     //创建一个表单数据对象
-    //     let formdata = new FormData(); //创建一个表单数据对象 可以理解为创建一个  <form>  </form>  
-    //     formdata.append("images", _this.files[0]); //往表单里面追加input  name="images"  value="文件"
-    //     formdata.append("username", "徐小杨");
-    //     formdata.append("age", "18");
-
-    //     //不用设置请求头
-    //     xhr.send(formdata);
-    //     xhr.onreadystatechange = function () {
-    //         if (xhr.readyState == 4 && xhr.status == 200) {
-    //             let data = JSON.parse(xhr.responseText);
-    //             console.log(data);
-    //             document.querySelector('#img').src = data.path;
-    //             document.querySelector('#imgval').value = data.path;
-    //         }
-    //     }
-    // }
 
 })
