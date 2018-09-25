@@ -218,7 +218,7 @@ span{
      position: absolute;
      top: 0px;
      right: 0px;
-     display: none;
+
      box-shadow: 2px 4px 8px 2px rgba(7, 17, 27, 0.1);
  }
  
@@ -460,4 +460,32 @@ span{
 }
 .section-name {
     margin-left: 10px;
+}
+.author-option{
+	
+	margin-top: 40px;
+	margin-left: 20px;
+	height: 500px;
+}
+.author-fuzu{
+	margin-left: 70px;
+}
+.author-magin{
+	margin-top:30px ;
+}
+.author-daohang1{
+	margin-left: 40px;
+}
+.author-option{
+	/* margin: auto; */
+	width: 600px;
+}
+.select-magin{
+	margin-left:10px ;
+}
+.author-btn-margin{
+	margin-left:250px ;
+	color:#fff;
+	background-color: #009688;
+	
 }

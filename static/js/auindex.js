@@ -66,6 +66,49 @@ $(function(){
         });
     })
 
+    //创建新书
+    var form = layui.form;
+    form.on('submit(write_novel)', function(data){
+        $.ajax({
+            url: '/author/write_novel',
+            type: 'POST',
+            dataType: 'JSON',
+            data: $('#write_novel').serialize(),
+            success: function (result) {
+                if(result.r == 'nname_is_empty'){
+                    alert("作品名不能为空！");
+                    return ;
+                 }
+                if(result.r == 'ok'){
+                    alert("作品创建成功");
+                }
+            }
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+      });
+
+      //添加章节
+      form.on('submit(write_section)', function(data){
+        $.ajax({
+            url: '/author/add_section',
+            type: 'POST',
+            dataType: 'JSON',
+            data: $('#write_section').serialize(),
+            success: function (result) {
+                if(result.r == 'sname_is_empty'){
+                    alert("章节名不能为空！");
+                    return ;
+                 }
+                if(result.r == 'ok'){
+                    alert("章节添加成功");
+                }
+            }
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+      });
+
+
+
     // //上传头像即其他信息
     // let img = document.querySelector('#images');
     // //当你选择文件的时候，value值会发生改变，触发change事件
