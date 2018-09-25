@@ -24,6 +24,8 @@
     padding-left: 200px;
     padding-top: 18px;
     float: left;
+    margin-left: 200px;
+    margin-top: 20px;
 }
 #box input{
     width: 300px;
@@ -33,8 +35,8 @@
     background-repeat: no-repeat;
     background-size: 25px;
     background-position:5px center;
-    padding:0 0 0 10px;
     border-radius: 5px;
+    text-indent: 1em;
 }
 #search{
     width: 78px;
@@ -46,19 +48,19 @@
     line-height: 32px;
     cursor: pointer;
     border-radius: 5px;
+    line-height: 40px;
+    
 }
-#login1 {
-    float: right;
-    width: 200px;
-    font-size: 16px;
-    font-family: 'Microsoft YaHei';
-    padding-top: 30px;
-    margin-right: 60px;
-    display: block;
+#search a {
+    color: white;
 }
 #login1 li{
     float: left;
     list-style-type: none;
+}
+.admin {
+    float: right;
+    padding-right: 200px;
 }
 .layui-nav {
     margin-top: 20px;
@@ -79,9 +81,6 @@
     margin-left: 290px;
     padding-top:15px;
 }
-/* body{
-	background-color: lightblue;
-} */
 #agree{
 	color: blue;
 
@@ -90,8 +89,6 @@
 	position: absolute;
 	top:100px;
 	left: 350px;
-	/* height: 500px; */
-	/* border: 1px solid gray; */
 	background-color: white;
 }
 .second-box{
@@ -129,7 +126,19 @@ span{
     left: 135px;
     top: 10px;
 }
-
+.n-right1 {
+    width: 430px;
+    height: 140px;
+    position: absolute;
+    left: 135px;
+    top: 10px;
+}
+.n-right1>p {
+    width: 100%;
+    height: 78px;
+    margin-top: 10px;
+    overflow: hidden;
+}
 .n-right>p {
     width: 100%;
     height: 78px;
@@ -231,13 +240,35 @@ span{
 #userimg{
     width: 36px;
     height: 36px;
-    padding: 0px;
+    line-height: 36px;
+    padding-right: 10px;
+    float: left;
 }
-#user1 {
+.userimg1{
+    padding-top: -5px;
+}
+.user1 img {
+    width: 40px;
+    height: 40px;
+    float: left;
     padding-top: 10px;
-    padding-left: 15px;
 }
- 
+.user1 {
+    float: left;
+    height: 40px;
+    line-height: 65px;
+    padding-left: 15px;
+    margin-top: -15px;
+}
+#login1 {
+    float: right;
+    width: 200px;
+    font-size: 16px;
+    font-family: 'Microsoft YaHei';
+    padding-top: 30px;
+    margin-right: 60px;
+}
+
 .red {
     color:red !important;
 }
@@ -280,15 +311,15 @@ span{
 .layui-col-md3 {
 	border: 1px solid rgb(93,145, 77);
 }
-.layui-col-md9 .index_top img {
-	width: 130px;
-	height: 130px;
+.layui-col-md7 .index_top img {
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
 	margin-top: 50px;
-	margin-left: 20px;
+    margin-left: 60px;
+    margin-bottom: 40px;
 }
-.layui-col-md9 .index_top  .top_right {
-	/*border: 1px solid red;*/
+.layui-col-md7 .index_top  .top_right {
 	width: 75%;
 	margin-top: -130px;
 	margin-left: 170px;
@@ -296,26 +327,31 @@ span{
 .top_right .bigtext {
 	font-size: 20px;
 }
-.line {
-	width: 95%;
-	margin-top: 40px;
-	margin-left: 20px;
-	height: 7px;
-	background-image: url(/img/line.png);
-}
-.layui-col-md9 .index_bottom {
+.layui-col-md7 .index_bottom {
 	width: 95%;
 	margin-top: 30px;
 	margin-left: 20px;
 }
-
+.bottom {
+    height: 470px;
+    width: 800px;
+    overflow: scroll;
+}
+.mybookcase {
+    padding-left: 50px;
+    padding-top: 25px;
+}
+#index {
+    display: block;
+}
+.bottom>div{
+    display: none;
+}
 .flex-container {
     display: flex;
-    /*background-color: lightgrey;*/
 }
 
 .flex-item {
-    /*background-color: cornflowerblue;*/
     width: 280px;
     height: 150px;
     margin: 15px;
@@ -340,13 +376,13 @@ span{
 	overflow: hidden;
 	margin-top: 5px;
 }
-.layui-col-md9 .index_center {
+.layui-col-md7 .index_center {
 	height: 280px;
 }
-.layui-col-md9 .index_center ul {
+.layui-col-md7 .index_center ul {
 	display: block;
 }
-.layui-col-md9 .index_center li {
+.layui-col-md7 .index_center li {
 	width: 20%;
 	height: 230px;
 	margin-left: 30px;
@@ -355,30 +391,103 @@ span{
 	float: left;	
 	text-align: center;
 }
-.layui-col-md9 .index_center .last {
+.layui-col-md7 .index_center .last {
 	border: none;
 }
-.layui-col-md9 .index_center .center1{
+.layui-col-md7 .index_center .center1{
 	margin-top: 20px;
 	height: 250px;
 }
-.layui-col-md9 .index_center li p {
+.layui-col-md7 .index_center li p {
 	margin-top: 15px;
 }
-.layui-col-md9 .index_center li a{
+.layui-col-md7 .index_center li a{
 	display: inline-block;
 	margin-top: 15px;
 	color: dodgerblue;
 }
-.layui-col-md9 .index_center li span {
+.layui-col-md7 .index_center li span {
 	color: rgb(93,145, 77);
 	font-size: 26px;
 }
-.layui-col-md9 .index_center li .layui-icon {
+.layui-col-md7 .index_center li .layui-icon {
 	font-size: 30px;
 	color: rgb(93,145, 77);
 }
-
+.text li{
+    margin-bottom: 20px;
+    position: relative;
+}
+.text h4{
+    font: 700 18px/24px 'Microsoft YaHei';
+    overflow: hidden;
+    height: 24px;
+    margin-bottom: 8px;
+    position: absolute;
+    left: 120px;
+    top: 0px;
+    display: inline-block;
+}
+.card {
+    margin-bottom: 30px;
+}
+.usearch {
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    left: 120px;
+    top: 25px;
+}
+.uinfo {
+    width: 70%;
+    height: 78px;
+    overflow: hidden;
+    position: absolute;
+    left: 120px;
+    top: 50px;
+    text-indent: 2em;
+    color: #666;
+    font-size: 14px;
+}
+.uupdate {
+    width: 200px;
+    font-size: 12px;
+    position: absolute;
+    left: 120px;
+    top: 130px;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.uda {
+    color: #666;
+    position: absolute;
+    left: 350px;
+    top: 130px;
+    display: inline;
+}
+.uright {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 940px;
+    top: 45px;
+    display: inline-block;
+}
+.uright p {
+    width: 100px;
+    height: 34px;
+    color: #fff;
+    border-radius: 100px;
+    text-align: center;
+    line-height: 34px;
+    margin-bottom: 20px;
+    background: rgb(93,145, 77);
+}
+#free {
+    margin-left: -5px;
+}
 .au-title {
     width: 100%;
     height: 50px;
