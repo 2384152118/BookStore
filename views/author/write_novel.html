@@ -1,3 +1,69 @@
 <% include header.html%>
-创建小说
+<li>
+    <h3 class="au-title">创建新书</h3>
+    <div>
+        <!--css的名字也是author-option-->
+        <div class="author-option">
+            <form action="" method="post" id="write_novel">
+                <div class="author-daohang1 author-magin">
+                    首发网站
+                    <input type="radio" name="web" value="银杏文学" title="银杏文学">银杏文学
+                    <input type="radio" name="web" value="晋江文学城" title="晋江文学城">晋江文学城
+                    <input type="radio" name="web" value="红袖添香" title="红袖添香"> 红袖添香
+                    <input type="radio" name="web" value="起点女生网" title="起点女生网"> 起点女生网
+                    <input type="radio" name="web" value="言情小说吧" title="言情小说吧"> 言情小说吧 <br />
+                </div>
+
+                <div class="layui-form-item">
+                    <!--author-margin是我自己在css样式取得名字，表示与上面的间距为30px-->
+                    <label class="layui-form-label author-magin">作品名称</label>
+                    <div class="layui-input-inline">
+                        <!--下面也有author-margin-->
+                        <input class="layui-input author-magin" type="text" name="nname" required lay-verify="required"
+                            placeholder="请勿添加书名号等特殊符号" autocomplete="off">
+                    </div>
+                </div>
+                <!--下面也有author-margin-->
+                <div class="author-magin">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作品类型
+                    <!--下面select-magin类样式调试左间距-->
+                    <select name="noveltype" lay-verify="" class="select-magin">
+
+                        <option value="">
+                            <pre>
+							    --请选择--   
+						</pre>
+
+                        </option>
+                        <option value="玄幻仙剑">玄幻仙剑</option>
+                        <option value="古代言情">古代言情</option>
+                        <option value="现代言情">现代言情</option>
+                        <option value="悬疑灵幻">悬疑灵幻</option>
+                    </select>
+                </div>
+
+                <div class="layui-form-item">
+                    <!--下面也有author-margin-->
+                    <label class="layui-form-label author-magin">作品标签</label>
+                    <div class="layui-input-inline">
+                        <!--下面也有author-margin-->
+                        <input class="layui-input author-magin" type="text" name="keywords" required lay-verify="required"
+                            autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">作品简介</label>
+                    <div class="layui-input-block">
+                        <!--下面也有author-margin-->
+                        <textarea name="info" class="layui-textarea author-magin"></textarea>
+                    </div>
+                </div>
+
+                <!--author-btn-margin是自己创建的样式，设置间距和颜色-->
+                <button class="layui-btn layui-btn-primary author-btn-margin " type="button" lay-submit lay-filter="write_novel">创建新书</button>
+            </form>
+        </div>
+    </div>
+</li>
 <% include footer.html %>

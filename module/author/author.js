@@ -18,6 +18,60 @@ router.get('/index', (req, res) => {
     data.aid = req.session.aid;
     data.aimg = req.session.aimg;
     data.aname = req.session.aname;
+
+    let arr = []; //用来存放所有小说的id;
+
+    async.waterfall([
+        function (cb) {
+            //根据作家id查找该作者的所以小说
+            let sql = 'SELECT * FROM novel WHERE aid= ?';
+            // let aid = JSON.parse(data.aid);
+            conn.query(sql, data.aid, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < results.length; i++) {
+                    arr.push(results[i].nid);
+                }
+                cb(null, results);
+            })
+        },
+        function (re, cb) {
+            //根据小说id查找该小说的所有章节
+            let str = JSON.stringify(arr);
+            let newstr = str.replace('[', '(').replace(']', ')');
+            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
+            conn.query(sql, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                for (let i = 0; i < re.length; i++) {
+                    let section = [];
+                    for (let j = 0; j < results.length; j++) {
+                        if (re[i].nid == results[j].nid) {
+                            section.push(results[j]);
+                        }
+                    }
+                    re[i].section = JSON.stringify(section);
+                }
+                cb(null, re);
+            })
+        }
+    ], (err, result) => {
+        data.books = result;
+        // console.log(data);
+        res.render('author/index', data);
+    });
+});
+
+//作家专区  作家资料
+router.get('/authorinfo', (req, res) => {
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
     data.asex = req.session.asex;
     data.atel = req.session.atel;
     data.aemail = req.session.aemail;
@@ -66,11 +120,9 @@ router.get('/index', (req, res) => {
     ], (err, result) => {
         data.books = result;
         console.log(data);
-        res.render('author/index', data);
+        res.render('author/authorinfo', data);
     });
 });
-
-
 
 //作家登录请求 post
 router.post("/alogin", (req, res) => {
@@ -116,7 +168,6 @@ router.post("/alogin", (req, res) => {
 
     });
 })
-
 //作家注册  post
 router.post("/regist", (req, res) => {
     let d = req.body;
@@ -190,7 +241,6 @@ router.post("/regist", (req, res) => {
     });
 });
 
-
 // 上传文件的文件夹设置
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { //存放路径
@@ -217,180 +267,172 @@ router.post('/upload', upload.single('images'), (req, res) => {
 
 //作者查看小说
 router.get('/look', (req, res) => {
+    let data = req.session.data;
+    res.render('author/look', data);
+})
+router.post('/look', (req, res) => {
     let data = {};
     data.aid = req.session.aid;
     data.aimg = req.session.aimg;
     data.aname = req.session.aname;
-    data.asex = req.session.asex;
-    data.atel = req.session.atel;
-    data.aemail = req.session.aemail;
-    data.address = req.session.address;
 
-    let arr = []; //用来存放所有小说的id;
+    let d = req.body;
+    console.log(d);
 
-    async.waterfall([
-        function (cb) {
-            //根据作家id查找该作者的所以小说
-            let sql = 'SELECT * FROM novel WHERE aid= ?';
-            let aid = JSON.parse(data.aid);
-            conn.query(sql, aid, (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                for (let i = 0; i < results.length; i++) {
-                    arr.push(results[i].nid);
-                }
-                cb(null, results);
-            })
-        },
-        function (re, cb) {
-            //根据小说id查找该小说的所有章节
-            let str = JSON.stringify(arr);
-            let newstr = str.replace('[', '(').replace(']', ')');
-            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
-            conn.query(sql, (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                for (let i = 0; i < re.length; i++) {
-                    let section = [];
-                    for (let j = 0; j < results.length; j++) {
-                        if (re[i].nid == results[j].nid) {
-                            section.push(results[j]);
-                        }
-                    }
-                    re[i].section = JSON.stringify(section);
-                }
-                cb(null, re);
-            })
+    //根据小说id查找该小说的所有章节
+    let sql = 'SELECT * FROM section WHERE nid =?'
+    conn.query(sql, d.nid * 1, (err, results) => {
+        if (err) {
+            console.log(err);
+            return;
         }
-    ], (err, result) => {
-        data.books = result;
-        console.log(data);
-        res.render('author/look', data);
-    });
+        //转换时间格式
+        for(let i=0;i<results.length;i++){
+            results[i].sdatetime=results[i].sdatetime.toLocaleString();
+        }
+        data.nname = d.nname;
+        data.book = results;
+        req.session.data = data;
+        res.json({
+            r: 'ok'
+        });
+    })
+
 })
-//创建小说
+//到写章节页面 
+router.get('/write_section', (req, res) => {
+    let data = req.session.data;
+    res.render('author/write_section', data);
+})
+router.post('/write_section', (req, res) => {
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
+
+    let d = req.body;
+    console.log(d);
+
+    //根据小说id查找该小说的所有章节
+    let sql = 'SELECT * FROM section WHERE nid =?'
+    conn.query(sql, d.nid * 1, (err, results) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        data.nname = d.nname;
+        data.nid = d.nid * 1;
+        data.book = results;
+        req.session.data = data;
+        res.json({
+            r: 'ok'
+        });
+    })
+})
+
+//章节添加到数据库
+router.post('/add_section', (req, res) => {
+    let data = {};
+    data.aid = req.session.aid;
+    data.aimg = req.session.aimg;
+    data.aname = req.session.aname;
+    let d = req.body;
+
+    //章节名不能为空
+    if(d.sname==""){
+        res.json({
+            r: 'sname_is_empty'
+        });
+        return ;
+    }
+    //判断正确加入数据库
+    let sql = 'INSERT INTO section(sname,sortnum,sdatetime,text,aid,aname,nid,nname) VALUES (?,?,?,?,?,?,?,?)';
+    let arr = [d.sname,d.sortnum,new Date().toLocaleString(),d.text,data.aid,data.aname,d.nid,d.nname];
+    conn.query(sql, arr, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.json({
+                r: 'db_err'
+            });
+            return;
+        }
+        res.json({
+            r: 'ok'
+        });
+    })
+})
+
+//到创建小说页面
 router.get('/write_novel', (req, res) => {
     let data = {};
     data.aid = req.session.aid;
     data.aimg = req.session.aimg;
     data.aname = req.session.aname;
-    data.asex = req.session.asex;
-    data.atel = req.session.atel;
-    data.aemail = req.session.aemail;
-    data.address = req.session.address;
-
-    let arr = []; //用来存放所有小说的id;
-
-    async.waterfall([
-        function (cb) {
-            //根据作家id查找该作者的所以小说
-            let sql = 'SELECT * FROM novel WHERE aid= ?';
-            let aid = JSON.parse(data.aid);
-            conn.query(sql, aid, (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                for (let i = 0; i < results.length; i++) {
-                    arr.push(results[i].nid);
-                }
-                cb(null, results);
-            })
-        },
-        function (re, cb) {
-            //根据小说id查找该小说的所有章节
-            let str = JSON.stringify(arr);
-            let newstr = str.replace('[', '(').replace(']', ')');
-            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
-            conn.query(sql, (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                for (let i = 0; i < re.length; i++) {
-                    let section = [];
-                    for (let j = 0; j < results.length; j++) {
-                        if (re[i].nid == results[j].nid) {
-                            section.push(results[j]);
-                        }
-                    }
-                    re[i].section = JSON.stringify(section);
-                }
-                cb(null, re);
-            })
-        }
-    ], (err, result) => {
-        data.books = result;
-        console.log(data);
-        res.render('author/write_novel',data);
-    });
+    res.render('author/write_novel', data);
 })
-//写章节 
-router.get('/write_section', (req, res) => {
+
+//创建小说成功 添加到数据库
+router.post('/write_novel', (req, res) => {
     let data = {};
     data.aid = req.session.aid;
     data.aimg = req.session.aimg;
     data.aname = req.session.aname;
-    data.asex = req.session.asex;
-    data.atel = req.session.atel;
-    data.aemail = req.session.aemail;
-    data.address = req.session.address;
 
-    let arr = []; //用来存放所有小说的id;
-
-    async.waterfall([
-        function (cb) {
-            //根据作家id查找该作者的所以小说
-            let sql = 'SELECT * FROM novel WHERE aid= ?';
-            let aid = JSON.parse(data.aid);
-            conn.query(sql, aid, (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                for (let i = 0; i < results.length; i++) {
-                    arr.push(results[i].nid);
-                }
-                cb(null, results);
-            })
-        },
-        function (re, cb) {
-            //根据小说id查找该小说的所有章节
-            let str = JSON.stringify(arr);
-            let newstr = str.replace('[', '(').replace(']', ')');
-            let sql = 'SELECT * FROM section WHERE nid in' + newstr;
-            conn.query(sql, (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                for (let i = 0; i < re.length; i++) {
-                    let section = [];
-                    for (let j = 0; j < results.length; j++) {
-                        if (re[i].nid == results[j].nid) {
-                            section.push(results[j]);
-                        }
-                    }
-                    re[i].section = JSON.stringify(section);
-                }
-                cb(null, re);
-            })
+    let d = req.body;
+     //小说名不能为空
+     if(d.nname==""){
+        res.json({
+            r: 'nname_is_empty'
+        });
+        return ;
+    }
+    //判断该作者的小说名是否存在
+    let sql = 'SELECT nid FROM novel WHERE aid=? AND nname=?';
+    conn.query(sql, [data.aid, d.nname], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.json({
+                r: 'db_err'
+            });
+            return;
         }
-    ], (err, result) => {
-        data.books = result;
-        console.log(data);
-        res.render('author/write_section',data);
-    });
+        if (result.length) {
+            res.json({
+                r: 'novel_has_exist'
+            });
+            return;
+        }
+        //判断正确加入数据库
+        let sql = 'INSERT INTO novel(nname,noveltype,keywords,info,ndatetime,aid,aname) VALUES (?,?,?,?,?,?,?)';
+        let arr = [d.nname, d.noveltype, d.keywords, d.info, new Date().toLocaleString(), data.aid, data.aname];
+        conn.query(sql, arr, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.json({
+                    r: 'db_err'
+                });
+                return;
+            }
+            res.json({
+                r: 'ok'
+            });
+        })
+    })
 })
 //完结状态
 router.post('/overbook', (req, res) => {
-    let d=req.body;
-    console.log(d.nid*1);
+    let d = req.body;
     //修改小说状态
+    let sql = 'UPDATE novel set serial=1 where nid=?';
+    conn.query(sql, d.nid * 1, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.json({
+            r: 'ok'
+        });
+    })
 })
 
 module.exports = router;

@@ -69,7 +69,10 @@ app.get('/coder', (req, res) => {
 app.use("/",require("./module/front/index.js"));
 //作者模块 子路由
 app.use("/author",require("./module/author/author.js"));
-
+//管理员登录
+app.use('/admin/login', require('./module/admin/login'));
+//管理员管理子路由
+app.use('/admin', require('./module/admin/index'));
 
 
 

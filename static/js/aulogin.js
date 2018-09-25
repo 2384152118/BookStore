@@ -13,6 +13,10 @@ $(function (){
             data: $('#aulogin').serialize(),
             success: function (result) {
                 console.log(result);
+                if(result.r == 'coder_err'){
+                    alert("验证码错误！");
+                    return ;
+                }
                 if(result.r == 'author_not'){
                     $('input[name="aname"]').parent().next('.layui-form-mid').html('账号不存在');
                     return ;
@@ -38,6 +42,10 @@ $(function (){
             data: $('#auregist').serialize(),
             success: function (result) {
                 console.log(result);
+                if(result.r == 'coder_err'){
+                    alert("验证码错误！");
+                    return ;
+                }
                 if(result.r == 'autour_exist'){
                     $('input[name="aname"]').parent().next('.layui-form-mid').html('用户已存在');
                     return ;
