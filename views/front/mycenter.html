@@ -13,7 +13,7 @@
 	<script src="/layui/layui.all.js"></script>
 </head>
 
-<body>
+<body class="author-body">
 	<div class="layui-container">
 		<div class="layui-row uscontent">
 			<div class="layui-col-xs6 layui-col-sm6 layui-col-md3">
@@ -29,8 +29,8 @@
 							<a href="javascript:;"><span class="layui-icon layui-icon-read">&nbsp;我的书架</span></a>
 						</li>
 						<li class="layui-nav-item">
-								<a href="javascript:;"><span class="layui-icon layui-icon-set">&nbsp;个人设置</span></a>
-							</li>
+							<a href="javascript:;"><span class="layui-icon layui-icon-set">&nbsp;个人设置</span></a>
+						</li>
 						<li class="layui-nav-item">
 							<a href="javascript:;"><span class="layui-icon layui-icon-share">&nbsp;邀请有礼</span></a>
 						</li>
@@ -43,7 +43,7 @@
 						<li class="layui-nav-item">
 							<a href="javascript:;"><span class="layui-icon layui-icon-set">&nbsp;订阅设置</span></a>
 						</li>
-						
+
 						<li class="layui-nav-item">
 							<a href="javascript:;"><span>退出登录</span></a>
 						</li>
@@ -56,7 +56,9 @@
 					<div class="index_top">
 						<img src="/img/lady1.jpg" />
 						<div class="top_right">
-							<p class="bigtext"><%= username%></p>
+							<p class="bigtext">
+								<%= username%>
+							</p>
 							<hr />
 							<p style="font-size: 16px;font-family: '楷书';">会员积分（动态粉丝值）：102点</p>
 							<p style="font-size: 16px;font-family: '楷书';margin-top: 10px;">您今天还没签到，你共签到10天，连续签到23天，50点</p>
@@ -85,11 +87,11 @@
 									<p>累计订阅：<span>50&nbsp;</span>银杏币</p>
 								</li>
 								<li class="last">
-										<h2 style="margin-top: 10px;"><i class="layui-icon layui-icon-speaker"></i>&nbsp;我的书评</h2>
-										<p><span>0</span>评论</p>
-										<p><span>0</span>回复</p>
-										<a href="#">查看</a>
-									</li>
+									<h2 style="margin-top: 10px;"><i class="layui-icon layui-icon-speaker"></i>&nbsp;我的书评</h2>
+									<p><span>0</span>评论</p>
+									<p><span>0</span>回复</p>
+									<a href="#">查看</a>
+								</li>
 							</ul>
 						</div>
 
@@ -105,11 +107,18 @@
 									<div class="layui-card-body n-card">
 										<img class="n-leftn-left" src="<%= n.nimg%>" alt="">
 										<div class="n-right1">
-											<h3><a href="#"><%= n.nname%></a></h3>
-											<p><%= n.info%></p>
+											<h3><a href="#">
+													<%= n.nname%></a></h3>
+											<p>
+												<%= n.info%>
+											</p>
 											<div class="n-card-footer">
-												<p class="n-card-author"><%= n.aname%></p>
-												<p class="n-card-type"><%= n.noveltype%></p>
+												<p class="n-card-author">
+													<%= n.aname%>
+												</p>
+												<p class="n-card-type">
+													<%= n.noveltype%>
+												</p>
 											</div>
 										</div>
 									</div>
@@ -120,51 +129,117 @@
 					<%}%>
 				</div>
 				<div class="invite">
-						<div class="userinfo">
-								<h3 class="au-title">用户资料</h3>
-								<div class="self">
-									<form action="" method="post" id="auinfo" enctype="multipart/form-data">
-										<label class="layui-form-label">头像：</label>
-										<label for="images" class="header">
-											<img  class="logo" /><br />
-										</label>
+					<div class="userinfo">
+						<h3 class="au-title">用户资料</h3>
+						<div class="self">
+
+							<form action="" method="post" id="uinfo" enctype="multipart/form-data">
+								<label class="layui-form-label">头像：</label>
+								<label for="images" class="header">
+									<img src="<%= uimg%>" class="logo" id="uimg" /><br />
+								</label>
+
+								<div class="layui-form-item" style="display:none">
+									<div class="layui-input-block">
+										<!-- 图片文件 -->
 										<input type="file" name="images" id="images" style="display:none">
-										<input type="hidden" value="" id="imgval">
-							
-										<div class="layui-form-item myinfo">
-							
-											<div class="layui-form-item">
-												<label class="layui-form-label">性别：</label>
-												<div class="layui-input-block au-sex">
-													<input type="radio" name="sex" value="男" title="男"> 男
-													<input type="radio" name="sex" value="女" title="女"> 女
-													<input type="radio" name="sex" value="保密" title="保密" checked=""> 保密
-												</div>
-											</div>
-							
-											<label class="layui-form-label">电话号码：</label>
-											<div class="layui-input-block">
-												<input type="text" name="atel" required lay-verify="required" autocomplete="off" class="layui-input"
-													value="">
-											</div><br />
-							
-											<label class="layui-form-label">邮箱：</label>
-											<div class="layui-input-block">
-												<input type="text" name="aemail" required lay-verify="required" autocomplete="off" class="layui-input"
-													value="">
-											</div><br />
-									</form>
-									<br />
-									<br />
-							
+									</div>
 								</div>
-								<button class="sure" type="button">确定保存</button>
-							</div>
+								<div class="layui-form-item" style="display:none">
+									<div class="layui-input-block">
+										<!-- 路径 -->
+										<input type="hidden" value="<%= uimg%>" name="uimg" id="imgval">
+									</div>
+								</div>
+
+								<div class="layui-form-item myinfo">
+									<label class="layui-form-label">用户名：</label>
+									<div class="layui-input-block">
+										<input type="text" name="username" required lay-verify="required" autocomplete="off" class="layui-input"
+										 value=<%=username%>>
+									</div><br />
+
+									<div class="layui-form-item">
+										<label class="layui-form-label">性别：</label>
+										<div class="layui-input-block au-sex">
+											<input type="radio" name="sex" value="男" title="男"> 男
+											<input type="radio" name="sex" value="女" title="女"> 女
+											<input type="radio" name="sex" value="保密" title="保密" checked=""> 保密
+										</div>
+									</div>
+
+									<label class="layui-form-label">电话号码：</label>
+									<div class="layui-input-block">
+										<input type="text" name="utel" required lay-verify="required" autocomplete="off" class="layui-input" value=<%=utel%>>
+									</div><br />
+
+									<label class="layui-form-label">邮箱：</label>
+									<div class="layui-input-block">
+										<input type="text" name="uemail" required lay-verify="required" autocomplete="off" class="layui-input" value="保密">
+									</div><br />
+
+									<label class="layui-form-label">地址：</label>
+									<div class="layui-input-block">
+										<input type="text" name="address" required lay-verify="required" autocomplete="off" class="layui-input" value="保密">
+									</div><br />
+									<button class="layui-btn layui-btn-primary sure" lay-submit lay-filter="uinfo" type="button">确定保存</button>
+							</form>
+
+
+
+
+
+						</div>
+					</div>
 				</div>
+
+
 			</div>
-		</div>
+			<script>
+				let img = document.querySelector('#images');
+				//当你选择文件的时候，value值会发生改变，触发change事件
+				img.onchange = function () {
+					//获取选中的文件信息：文件内容
+					console.log(this.files[0]);
+					let _this = this;
+					// 使用ajax发送图片到服务器
+					let xhr = new XMLHttpRequest();
+					xhr.open('POST', '/front/upload');
+					//创建一个表单数据对象
+					let formdata = new FormData(); //创建一个表单数据对象 可以理解为创建一个  <form>  </form>  
+					formdata.append("images", _this.files[0]); //往表单里面追加input  name="images"  value="文件"
+					//不用设置请求头
+					xhr.send(formdata);
+					xhr.onreadystatechange = function () {
+						if (xhr.readyState == 4 && xhr.status == 200) {
+							let data = JSON.parse(xhr.responseText);
+							console.log(data);
+							document.querySelector('#uimg').src = data.path; //即时修改显示的头像
+							document.querySelector('#imgval').value = data.path; //存储上传头像的路径，传到后台
+						}
+					}
+				}
 
 
-	</div>
+				//发起修改作者信息请求
+				var form = layui.form;
+				form.on('submit(uinfo)', function () {
+					console.log(1111);
+					$.ajax({
+						url: '/front/uinfo',
+						type: 'POST',
+						dataType: 'JSON',
+						data: $('#uinfo').serialize(),
+						success: function (result) {
+							console.log(6666,result);
+							if (result.r == 'ok') {
+								alert("修改成功");
+								window.location.href = "/front/mycenter";
+							}
+						}
+					});
+					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+				})
+			</script>
 
-<%include footer.html%>
+			<%include footer.html%>

@@ -16,13 +16,17 @@ $(function () {
 
     //加入书架的点击事件
     $("#section").on("click","#joinbook",function(){
-        alert("成功加入书架！")
         $.ajax({
             url: '/front/join',
             type: 'POST',
             dataType: 'JSON',
             data: {novelid:$(this).attr("data-novelid")},
             success: function (result) {
+                if(result.r == 'join_err'){
+                    alert("请先登录！");
+                    return ;
+                }
+                alert("成功加入书架！")
                 console.log(result);
                 // window.location.href='/mycenter';
             }

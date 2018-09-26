@@ -2,7 +2,7 @@
 <div style="padding: 20px; background-color: #F2F2F2;">
     <div class="layui-container" id="section">
         <ul class="text">
-            <% for(let n of noveltype){%>
+            <% for(let n of novellist){%>
             <div class="layui-card">
                 <div class="layui-card-body n-card card">
                     <li>
@@ -12,7 +12,7 @@
                             <a href=""><%=n.aname%></a>
                             <a href=""><%=n.noveltype%></a>
                             <a href=""><%=n.serial==0?"连载":"完结"%></a>
-                        </span>
+                        </span> 
                         <p class="uinfo"><%=n.info%></p>
                         <p class="uupdate">最新更新：</p>
                         <p class="uda"><%=n.ndatetime.slice(0,10) %></p>
